@@ -1,0 +1,71 @@
+@import '_variables';
+
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: $general-background;
+
+    .space
+    {
+        height: 200px;
+    }
+
+    .absoluteCenter
+    {
+        position: fixed;
+        bottom: 400px;
+    }
+
+    .logoImage
+    {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        height: 110px;
+        width: auto;
+        //max-width: 575px; //retina compatible
+        //max-height: 155px; //retina compatible
+    }
+
+    .error
+    {
+        width: 471px;
+        padding: 15px;
+        margin: 0 auto;
+        color: Red;
+
+    }
+    .form-signin-heading
+    {
+        width: 614px;
+        padding: 15px;
+        margin: 0 auto;
+    }
+
+    .form-signin 
+    {
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+        
+        .form-control 
+        {
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
+            &:hover 
+            {
+                z-index: 2;
+            }
+        }
+
+    }
+
+}
+
+
+

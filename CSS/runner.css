@@ -1,0 +1,62 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 4, 2016, 5:28:11 PM
+    Author     : andrea
+*/
+.general {
+  background-color: #C5D8DA !important;
+  padding: 20px; }
+  .general .centerTextAlign {
+    text-align: center; }
+  .general .navbarColor {
+    background-color: white; }
+  .general .borderVertical {
+    border-style: ridge; }
+  .general .runnerGeneral .right {
+    position: absolute;
+    right: 20px; }
+  .general .runnerGeneral .fixedDownRight {
+    position: fixed;
+    bottom: 10px;
+    right: 10px; }
+  .general .runnerGeneral .fixedTopLeft {
+    position: fixed;
+    top: 0px;
+    left: 10px; }
+  .general .runnerGeneral .fixedTopRight {
+    position: fixed;
+    top: 10px;
+    right: 10px; }
+  .general .runnerGeneral .fixedTopSecondRight {
+    position: fixed;
+    top: 150px;
+    right: 10px; }
+  .general .runnerGeneral .green {
+    background-color: greenyellow; }
+  .general .runnerGeneral .red {
+    background-color: red; }
+  .general .runnerGeneral .leftEqual {
+    font-weight: bold;
+    color: blue; }
+  .general .runnerGeneral .noticeIt {
+    font-weight: bold;
+    font-size: 250%;
+    border-style: solid;
+    border-color: white;
+    border-width: 5px; }
+  .general .runnerGeneral .warning {
+    color: red; }
+  .general .runnerGeneral .singleRow {
+    color: red; }
+  .general .runnerGeneral .typeChose .btn-group .evidentActive:active {
+    background-color: #04233E !important; }
+  .general .runnerGeneral .typeChose .btn-group .btn-primary:active {
+    background-color: #04233E !important; }
+  .general .runnerGeneral .typeChose .btn-group .active {
+    background-color: #04233E !important; }
+
+/*# sourceMappingURL=runner.css.map */

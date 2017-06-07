@@ -1,0 +1,116 @@
+@import '_variables';
+
+
+.general
+{
+    background-color: $general-background !important;
+    padding: 20px;
+
+    .borderLabel
+    {
+	border-radius: 5px;
+	background-color: $borderInternal;        
+	//border: 1px solid $borderLight;
+        padding: 7px; 
+        //width: 100%;
+    }	
+
+    .centerTextAlign
+    {
+        text-align: center
+    }
+
+    .navbarColor
+    {
+        background-color: $navbarColor;
+    }
+
+    .borderVertical
+    {
+        border-style: ridge;
+        //border: 1px solid black;
+    }            
+    
+    .runnerGeneral
+    {
+        .right
+        {
+            position: absolute;
+            right: 20px;
+        }
+
+        .fixedDownRight
+        {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        .fixedTopLeft
+        {
+            position: fixed;
+            top: 0px;
+            left: 10px;
+        }
+
+        .fixedTopRight
+        {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+
+        .fixedTopSecondRight
+        {
+            position: fixed;
+            top: 150px;
+            right: 10px;
+        }
+       
+        .green
+        {
+            background-color: $active-button;
+        }
+        .red
+        {
+            background-color: $disabled-button;
+        }  
+        .leftEqual
+        {
+            font-weight: bold;
+            color: $leftEqual;
+        }
+        .noticeIt
+        {
+            font-weight: bold;
+            font-size: 250%;
+            border-style: solid;
+            border-color: white;
+            border-width: 5px;
+
+        }
+	.warning
+	{
+	    color: $warning;
+	}
+	
+        .singleRow
+        {
+            color: $simpleRow;
+        }
+        .typeChose{
+            .btn-group{
+                .evidentActive:active{
+                    background-color: #04233E !important;
+                }
+                .btn-primary:active{
+                    background-color: #04233E !important;
+                }
+                .active{
+                    background-color: #04233E !important;
+                }
+            }
+        }
+    }
+}
+

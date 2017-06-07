@@ -1,0 +1,71 @@
+<?php
+
+	function getAllGroups( $path )
+	{
+		//echo $path . "<br>";
+	$parentGroups = getParentGroups($path);
+	//print_r($parentGroups);
+     	$groups = [];
+	array_push( $groups, "scint_rebin" );
+     	// general analyzes is the third
+        $stack = getGroupsFromXml($path, $parentGroups[ 4 ] ); 
+        for( $a = 0 ; $a < count( $stack ) ; $a++ )
+        {
+            array_push( $groups, $stack[ $a ] );    
+        }        
+        return $groups ;
+	}
+
+	function getAllValues( $path , $parent)
+	{
+	    $ris = [];
+	    //rebin is the special one
+	    $rebin = readValue( $path , "scints" , "scint_rebin" );
+ 	
+	    //general analyzes is the third
+	    $stack = getGroupsFromXml($path, $parent );
+	    //print_r( $stack );
+	    for( $a = 0 ; $a < count( $stack ) ; $a++ )
+            {
+        	$newValue = readValue( $path , $parent ,$stack[ $a ]);
+            	array_push( $ris, $newValue );    
+            }            
+    	    return $ris;
+
+	}
+
+	function getParentGroups( $path ) //parentGroup exists because the groups 
+	//(like mimitos, scints etc) are not directly under the xml tag.. 
+	{	
+	    //echo $path;
+		$xml=simplexml_load_file($path) or die("Error: Cannot create object 1");
+	    $ris = [];
+	    foreach ($xml->children() as $child)
+		{
+			array_push($ris, $child->getName());
+		}
+		return $ris;
+	}
+
+	function getGroupsFromXml( $path, $parentGroup ) //parentGroup exists because the groups 
+	//(like mimito, scint etc) are not directly under the xml tag.. 
+	{
+		$xml=simplexml_load_file($path) or die("Error: Cannot create object 2");
+	    $ris = [];
+		foreach ($xml->$parentGroup->children() as $child)
+		{
+			array_push($ris, $child->getName());
+		}
+		return $ris;
+	}
+	
+	function readValue($path, $parent, $valueName)
+	{
+		//echo $valueName;
+		$xml=simplexml_load_file($path) or die("Error: Cannot create object 3");
+	        $ris = $xml->$parent->$valueName->attributes()[0];
+		return $ris; 
+	}
+
+
+?>

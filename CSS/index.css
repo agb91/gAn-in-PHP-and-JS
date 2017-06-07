@@ -1,0 +1,129 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 4, 2016, 5:28:11 PM
+    Author     : andrea
+*/
+.indexGeneral {
+  padding: 20px;
+  background-color: #C5D8DA; }
+  .indexGeneral .height50 {
+    height: 53px; }
+  .indexGeneral .width240 {
+    width: 240px; }
+  .indexGeneral .width120 {
+    width: 120px; }
+  .indexGeneral .moveDownSetting {
+    margin-top: 60px; }
+  .indexGeneral .moveUpSetting {
+    position: relative;
+    top: -131px; }
+  .indexGeneral .styleArea {
+    width: 103%; }
+  .indexGeneral .littleRight {
+    margin-left: 13px; }
+  .indexGeneral .well-height-extra {
+    height: 350px; }
+  .indexGeneral .well-height {
+    height: 250px; }
+  .indexGeneral .absoluteCenter {
+    position: fixed;
+    bottom: 400px;
+    width: 100%; }
+  .indexGeneral .transparent {
+    opacity: 0.4;
+    pointer-events: none; }
+  .indexGeneral .borderGroupInternal {
+    border-radius: 25px;
+    border: 1px solid rgba(128, 128, 128, 0.25);
+    padding: 10px;
+    width: 100%;
+    height: 123px; }
+  .indexGeneral .borderGroup {
+    border-radius: 25px;
+    border: 2px solid #5e5ebb;
+    padding: 20px;
+    margin-top: 20px;
+    width: 100%;
+    height: 450px; }
+  .indexGeneral .borderLight {
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.25);
+    padding-left: 7px;
+    width: 100%; }
+  .indexGeneral .borderLightLeft {
+    border-radius: 5px;
+    background-color: rgba(128, 128, 128, 0.25);
+    padding-right: 30px;
+    padding-left: 19px;
+    padding-top: 11px;
+    padding-bottom: 7px; }
+  .indexGeneral .starter {
+    padding: 5px;
+    margin-top: 5px; }
+  .indexGeneral .starterButton {
+    width: 80px;
+    height: 40px; }
+  .indexGeneral .row .logoImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 110px;
+    width: auto; }
+  .indexGeneral .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+  .indexGeneral .centerTextAlign {
+    text-align: center; }
+  .indexGeneral .white {
+    background: white; }
+    .indexGeneral .white:hover {
+      background: greenyellow; }
+  .indexGeneral .full {
+    width: 100%; }
+  .indexGeneral .half {
+    width: 50%; }
+  .indexGeneral .greenWell:hover {
+    background: greenyellow; }
+  .indexGeneral .blackText {
+    color: black; }
+  .indexGeneral .fixedTopRight {
+    position: fixed;
+    top: 10px;
+    right: 10px; }
+  .indexGeneral .fixedTopLeft {
+    position: absolute;
+    top: 10px;
+    left: 10px; }
+  .indexGeneral .releaseAegis {
+    margin-top: 120px; }
+    .indexGeneral .releaseAegis .center {
+      text-align: center; }
+  .indexGeneral .moveUp {
+    margin-top: -45px; }
+  .indexGeneral .moveDown {
+    margin-top: 25px; }
+  .indexGeneral .scrollable {
+    background: #eaeaea;
+    overflow-y: scroll; }
+  .indexGeneral .logBlock {
+    height: 270px;
+    max-height: 270px; }
+  .indexGeneral .littlePadding {
+    margin: 5px; }
+  .indexGeneral .setting {
+    position: absolute;
+    left: 78px;
+    top: 265px; }
+  .indexGeneral .advancedSettings {
+    margin-top: -92px; }
+  .indexGeneral .settingButton {
+    font-weight: bold;
+    padding: 15px;
+    width: 80%; }
+
+/*# sourceMappingURL=index.css.map */
