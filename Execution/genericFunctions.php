@@ -3,24 +3,6 @@
 	//include 'editConfigFunctionsCommons.php';
 	//include 'PHP/editgAnBranchFunctionsCommons.php';
 
-
-function getGroupsFromFolder( $allAnalyzes )
-{
-    $analyzes = scandir( $allAnalyzes );
-    $cleanAnalyzes = [];
-    for ( $i = 0 ; $i < count( $analyzes ) ; $i++ )
-    {
-        if ( substr( $analyzes[ $i ] , -2 ) == ".C")
-        {
-            $toAdd = $analyzes[ $i ];
-            $toAdd = substr( $toAdd , 0 , ( strlen( $toAdd ) - 2 ) );
-            array_push( $cleanAnalyzes , $toAdd );
-            //echo $toAdd . "--";
-        }
-    }
-    return $cleanAnalyzes;
-}
-
 function cleanString( $str )
 {
 	$str = trim( $str );
@@ -74,36 +56,6 @@ function xss_clean($data)
 }
 
 	
-function checkForBranches()
-{
-    //call the rooc data analisys program with the correct arguments by running a bash file
-    $command = "./showBranches.sh ";
-    $descriptorspec = array(
-        0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
-        1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
-        2 => array("pipe", "w")  // stderr is a file to write to
-    );
-    //proc_open is considered insicure (but php doesn't deprecate it): 
-    //but there is no other solution to run a root program from php
-    $process = proc_open ($command , $descriptorspec , $pipes);
-    fclose($pipes[0]);
-    $output =  "" ;
-    if(!feof($pipes[1])) //in this pipe normal expected output
-    {
-        $output .= stream_get_contents($pipes[1]) . "<br>";
-    }    
-    fclose($pipes[1]);
-
-    if(!feof($pipes[2]))//in this pipe errors in case of crash :(
-    {
-       $output .= stream_get_contents($pipes[2]) . '<br>';
-    }
-    fclose($pipes[2]);
-    proc_close ( $process );//we have finished
-    $pieces = explode("\n", $output);//order the output in rows, not in a unique continuous stream
-    
-    return $pieces;
-}
     
 function fileReaderGeneral($path)
 {
@@ -180,22 +132,7 @@ function isPathSafe($sourceRootPathNew)// 0 is ok, 1 problems
     return $ris;
 }
 
-function isVersion($version)// 0 yes, 1 false
-{
-    $ris = 0;
-    $pieces = explode(".", $version);
-        
-    $test = trim( implode('',$pieces));
-    //echo "|".$test."|";
-    //$test = "123 ";
 
-    if( !is_numeric( $test ) )
-    {
-        $ris = 1 ;    
-    }    
-    
-    return $ris;
-}
 
 
 ?>

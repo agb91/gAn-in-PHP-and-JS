@@ -5,9 +5,15 @@
  * - runner.php
  */
 
-//include 'editConfigFunctionsCommons.php';
-//include 'PHP/editgAnBranchFunctionsCommons.php';
-//include 'genericFunctions.php';
+function fileReaderGeneral($path)
+{
+	$file = $path;
+	echo "opening: ".$file.'<br>';
+	$myfile = fopen($file, "r") or die("Unable to open file! (general) ");
+	$fileContent = fread($myfile,filesize($file));
+	fclose($myfile);
+	return trim($fileContent);
+}
 
 
 function getRunToPrint( $cardinality , $textFromTextMode, $whichRunFirst , $whichRunSecond)
@@ -38,17 +44,7 @@ function getCardinality($textMode , $whichRunFirst , $whichRunSecond)
 	}
 	else
 	{
-		if( strlen( $whichRunFirst ) > 6 )
-		{ 
-			$cardinality = "multipleSpread";
-			//echo $cardinality;
-		}
-		else
-		{
-			$cardinality = "single";
-			//echo $cardinality;
-		}
-
+		$cardinality = "single";
 	}
     if( $textMode == "on" )
     {
@@ -230,15 +226,13 @@ function executeBash($command)
  * The function return the output of the bash.
  * OPTIMIZED FOR SINGLE FOR NOW
  */
-function run($wr, $analisys, $gAnPath)
+function runSingle($wr, $analisys, $gAnPath)
 {
     //echo 'path now: '. $gAnPath . ' <br> ';
     //echo "analisys: " . $analysis . "<br>";
-    //echo "run" . $wr . "<br>";
     if ( !is_numeric($wr) )
     {
         echo "inserted run: " . $wr;
-        echo "Inserted run is not acceptable";
         $wr = 0;
     }
 
@@ -253,7 +247,7 @@ function run($wr, $analisys, $gAnPath)
     {
         //call the rooc data analisys program with the correct arguments by running a bash file
         // escapeshellarg is useful to avoid code injection
-        $command = "./gAnShStarter.sh " . escapeshellarg($wr ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
+        $command = "./../Batch/gAnShStarter.sh " . escapeshellarg($wr ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
         
 	$output = executeBash($command);
 
@@ -306,7 +300,7 @@ function runRange($wr1, $wr2, $analisys, $gAnPath)
     {
         //call the rooc data analisys program with the correct arguments by running a bash file
         // escapeshellarg is useful to avoid code injection
-        $command = "./gAnShStarterMultiple.sh " . escapeshellarg( $wr1 ) . " ". escapeshellarg( $wr2 ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
+        $command = "./../Batch/gAnShStarterMultiple.sh " . escapeshellarg( $wr1 ) . " ". escapeshellarg( $wr2 ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
         
 	$output = executeBash($command);
 
@@ -343,7 +337,7 @@ function runRangeSheet($analisys, $gAnPath)
     {
         //call the rooc data analisys program with the correct arguments by running a bash file
         // escapeshellarg is useful to avoid code injection
-        $command = "./gAnShStarterMultipleSheet.sh " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
+        $command = "./../Batch/gAnShStarterMultipleSheet.sh " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
         
 	$output = executeBash($command);
 
@@ -452,5 +446,22 @@ function killZombies($z)
     } 
 }
 
+
+function cleanString( $str )
+{
+	$str = trim( $str );
+	//$str = filter_var($str, FILTER_SANITIZE_STRING);
+	$str = htmlspecialchars($str, ENT_IGNORE, 'utf-8');
+	$str = strip_tags( $str );
+	//$str = filter_var($str, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+	$str = htmlentities( $str );
+	//$str = xss_clean( $str );
+	
+	//echo "<br><br><br>string before: " . $str;
+	//$str = escapeshellarg( $str );//already did before the exec command
+	//echo "<br>string after: " . $str . "<br><br><br><br>";
+	
+	return $str;
+}
 
 ?>

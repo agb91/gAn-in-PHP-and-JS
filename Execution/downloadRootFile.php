@@ -1,7 +1,7 @@
 <?php
 
-	include "Globals.php";
-	include "PHP/genericFunctions.php";
+	include "..Globals.php";
+	include "genericFunctions.php";
 
 	//echo "alive <br>";
 

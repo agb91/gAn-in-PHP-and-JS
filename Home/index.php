@@ -101,7 +101,7 @@
                                     </h3>
                                 </div>
                                 
-                                <form class = "well well-height-extra"  action="runner.php" method="post">
+                                <form class = "well well-height-extra"  action="../Execution/runner.php" method="post">
                                     <div class = "row" >
                                         <div id="opacityChanges" class = "col-xs-6 ridge borderLightLeft">
                                             <div class = "col-xs-12 height50">
@@ -137,7 +137,7 @@
                                                 </div>
                                             </div> 
                                             <div id="areaBlock" hidden >
-                                                <textarea id="runsTextualInput" class="form-control styleArea" rows="5" id="comment"></textarea>
+                                                <textarea id="runsTextualInput" class="form-control styleArea" rows="5" ></textarea>
                                             </div>   
                                         </div>
                                         <div class = "col-xs-4 ridge" data-toggle='tooltip' title='Select an analysis from the dropdown menu; this will be applied to the selected run'>
@@ -260,7 +260,7 @@
                                     </h3>
                                 </div>
                                 
-                                <form class = "well well-height" action="runner.php" method="post">
+                                <form class = "well well-height" action="../Execution/runner.php" method="post">
                                     <div class = "row" >
                                         <div class = "col-xs-6 ridge">
                                             <div class = "row  centerTextAlign" >
