@@ -11,7 +11,7 @@
 		{
 			$password=$_POST['password'];
 			$realPassword = "test";
-			
+
 			if (strcmp($password, $realPassword) == 0) 
 			{
 				$_SESSION['logged']="logged"; // Initializing Session
