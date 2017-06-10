@@ -14,7 +14,7 @@
         include 'imagesFunctions.php';
         include 'runnerFunctions.php';
         
-        print_r($_POST);
+        //print_r($_POST);
 
 		//first: understand in which case we are
         if(  isset( $_POST["whichRunSecond"] ) )
@@ -25,7 +25,7 @@
         }
         else 
         {
-        	echo "<br> second run not set";
+        	//echo "<br> second run not set";
         }
         if(  isset( $_POST["whichRun"] ) )
         {
@@ -35,27 +35,23 @@
         }
         else
         {
-        	echo "<br> second run not set";
+        	//echo "<br> second run not set";
         }
 		
         $cardinality = getCardinality($textMode , $whichRunFirst , $whichRunSecond);
-		//echo "<br> cardinality: " . $cardinality;
+		echo "<br> cardinality: " . $cardinality;
 		if( $cardinality == "textual" )
 		{
         	$textFromTextMode = fileReaderGeneral("../runSheet.txt");
-        	echo "<br> textFromSheet: " . $textFromTextMode;
+        	//echo "<br> textFromSheet: " . $textFromTextMode;
         	
 		}
         
         $whichAnalysis = $_POST["selectedAnalysisSingle"];
         $whichAnalysis = $whichAnalysis . $_POST["selectedAnalysisMultiple"];
         $whichAnalysis = cleanString( $whichAnalysis );
-        echo "<br>the read analysis is : " . $whichAnalysis;
-        
-
-    	
-    	//echo "text mode: " . $textMode;
-
+        //echo "<br>the read analysis is : " . $whichAnalysis;
+      
 
     }
 ?>
@@ -148,20 +144,19 @@
 		                    	
 				    if( $cardinality == "textual" ) // case textual input
 		            {
-						echo "textual";
+						//echo "textual";
 		                $o = runRangeSheet($whichAnalysis, $gAnPath);
 		            }
 				    if( $cardinality == "single" )
 				    {	
-						echo "single";
+						//echo "single";
 		    			$o = runSingle( $whichRunFirst, $whichAnalysis, $gAnPath);
 		    		}
 				    if ( $cardinality == "multipleRange" )
 				    {
-						echo "multipleRange: " . $whichRunFirst . "---" . $whichRunSecond;
+						//echo "multipleRange: " . $whichRunFirst . "---" . $whichRunSecond;
 						$o = runRange( $whichRunFirst, $whichRunSecond, $whichAnalysis, $gAnPath);
 		    		}
-				    
 				    $outputBlocks = getBlocks( $o );
 		            printBlocks( $outputBlocks );
 				    echo "</div>";
@@ -192,24 +187,18 @@
 	    	<?php createCheckBoxImages(); ?>
 
             <?php
-            
-            	$runs = $whichRunFirst;
-                $runs = explode(";", $runs);
-                echo "<p id='getRuns' hidden>";
-                for( $i = 0; $i < count( $runs ); $i++)
-                {
-                    echo "-" . $runs[ $i ];
-                }
-        		if ($cardinality == "multipleRange")
-        		{
-        			echo $whichRunSecond;
-        			array_push($runs, $whichRunSecond);
-        		}
-                if($textMode == "on")
-                {
-                    echo $textFromTextMode;
-                }
-                echo "</p>";
+            	if( strcasecmp ( $cardinality, "Single" ) == 0)
+            	{
+            		$runs = array($whichRunFirst);
+            		echo "<p id='getRuns'>" . $whichRunFirst . "</p>";
+            	}
+            	if( strcasecmp ( $cardinality, "Multiple" ) == 0)
+            	{
+            		$runs = array($whichRunFirst,$whichRunSecond);
+            		echo "<p id='getRuns'>" . $whichRunFirst . "-" . $whichRunSecond . "</p>";
+            	}
+            	
+                
             ?>
             <div hidden id = "tipWell" class="well col-xs-2 fixedMiddleRight"> 
                 "Right-click on the image for more options"  
@@ -228,6 +217,6 @@
 	     		<div class="col-xs-1"></div>  
             </div>
  
-         /div>    
+         </div>    
     </body>    
 </html>

@@ -337,25 +337,28 @@ function manageImagesText(textRuns)
 }
 
 
-function manageImagesStandard(runsArray)//single or spread runs
+function manageImagesSingle(runsArray)//single or spread runs
 {
-	    for( var a = 1; a < (runsArray.length - 1)  ; a++ )
+		alert("Single, itaratiorns: " + runsArray.length);
+	    for( var a = 0; a < (runsArray.length)  ; a++ )
 	    {// the first and the last are useless.. 
 		    //var n = 0;
 		    var s = 0;
-		var thisRun = runsArray[ a ];
-		var filename = "output/gAnOut_" + thisRun + ".root";
-	
-		var arrayFiles = [];
-		//console.log( "The file name is: " + filename ); 
-		//tipical error: filename doesn't exist. If error check this before. (maybe too many slash or no slash)
-		JSROOT.OpenFile(filename, function(file) {
+		    var thisRun = runsArray[ a ];
+		    alert( "a=" + a + ";  runsArray = " + runsArray );
+		    alert(thisRun);
+		    var filename = "../output/gAnOut_" + thisRun + ".root";
+		    alert("filename: |" + filename + "|");
+			var arrayFiles = [];
+			//console.log( "The file name is: " + filename ); 
+			//tipical error: filename doesn't exist. If error check this before. (maybe too many slash or no slash)
+			JSROOT.OpenFile(filename, function(file) {
 			//console.log("read file general: " + file);
 		    for ( var i = 0; i < ( file.fKeys.length ); i++ )//for all the keys in the file
 		    {
 		        console.log( "Standard: I found the keys: " + file.fKeys[i].fName );
 		        arrayFiles.push(file.fKeys[i].fName+"---"+i);
-			logName(file.fKeys[i].fName);
+		        logName(file.fKeys[i].fName);
 		    }
 		    /*for( var h = 0; h < arrayFiles.length ; h++)
 		    {
@@ -400,23 +403,25 @@ function logName(name)
 function updateGUI() 
 {
 	var runs = $( "#getRuns" ).text();
-	//alert( runs );
+	alert(runs);
+	
 	var runsArray = runs.split("-");
-	//alert (runsArray);
-	var groups = $( "#hereTheGroups").text();
-	var groupsArray = groups.split("-");
+	alert(runsArray);
+	
+	//var groups = $( "#hereTheGroups").text();
+	//var groupsArray = groups.split("-");
 	//alert( groupsArray );
 
 	var cardinality = $( "#cardinality" ).text();
-	//alert(cardinality);	
+	alert(cardinality);	
 	//console.log(runsArray);
 
-	if (cardinality == "single")
+	if (cardinality == "Single" || cardinality == "single")
 	{
-		manageImagesStandard(runsArray);
+		manageImagesSingle(runsArray);
 	}
 
-	if (cardinality == "multipleRange")
+	if (cardinality == "Multiple" || cardinality == "multiple")
 	{
 		manageImagesMultiple(runsArray);   
 	} 

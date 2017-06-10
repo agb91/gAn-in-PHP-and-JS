@@ -79,17 +79,14 @@ function echoRootLikeText($textRuns , $whichAnalysis)
 }
 
 //this is untill there is only one groups in a single file (easier)
-function echoRootLikeSimple($runs, $whichAnalysis)
+function echoRootLikeSimple()
 {
-	//for ($i = 0; $i < count($runs); $i++)
-	//{
 		for( $s = 0; $s < 10 ; $s++ )
 		{
 			//echo "<div id='image" . $runs[$i] . "-" . $whichAnalysis . $s . "' style='width: 100%'>";
 			echo "<div id='image" . $s . "' style='width: 100%'>";
 			echo "</div>";
 		}
-	//}
 }
 
 ?>

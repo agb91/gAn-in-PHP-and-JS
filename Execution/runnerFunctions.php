@@ -216,7 +216,7 @@ function executeBash($command)
         }
         fclose($pipes[2]);
         proc_close ( $process );//we have finished
-	return $output;
+ 	return $output;
 }
 
 
@@ -228,30 +228,20 @@ function executeBash($command)
  */
 function runSingle($wr, $analisys, $gAnPath)
 {
-    //echo 'path now: '. $gAnPath . ' <br> ';
-    //echo "analisys: " . $analysis . "<br>";
-    if ( !is_numeric($wr) )
-    {
-        echo "inserted run: " . $wr;
-        $wr = 0;
-    }
-
-    if( isAnalysisSafe( $analisys ) == 1 )
-    {
-        //echo "selected analysis is not acceptable";
-        $analisys = "---";
-    }
-
+	echo "<br><br> analisys: " . $wr;
+	
     $output="";
     try 
     {
         //call the rooc data analisys program with the correct arguments by running a bash file
         // escapeshellarg is useful to avoid code injection
-        $command = "./../Batch/gAnShStarter.sh " . escapeshellarg($wr ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
+        $command = "./../Batch/genericStarter.sh " . escapeshellarg($wr ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
+    echo "<br><br> command runSingle: " . $command;    
         
+        
+        	
 	$output = executeBash($command);
-
-        $pieces = explode("\n", $output);//order the output in rows, not in a unique continuous stream
+	    $pieces = explode("\n", $output);//order the output in rows, not in a unique continuous stream
         $dim = count($pieces);
         $output="";
         for ($i = 0; $i < $dim; $i++) {
@@ -455,8 +445,12 @@ function cleanString( $str )
 	$str = strip_tags( $str );
 	//$str = filter_var($str, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 	$str = htmlentities( $str );
-	//$str = xss_clean( $str );
 	
+	//echo "<br><br><br> str here is: |" . strcmp( substr($str, -1) , ";"). "|";
+	if( strcmp( substr($str, -1) , ";") == 0 )
+	{
+		$str = substr($str, 0, -1);
+	}
 	//echo "<br><br><br>string before: " . $str;
 	//$str = escapeshellarg( $str );//already did before the exec command
 	//echo "<br>string after: " . $str . "<br><br><br><br>";
