@@ -10,7 +10,7 @@
 		else
 		{
 			$password=$_POST['password'];
-			$realPassword = "GetHbar!16";
+			$realPassword = "ahaahahah";
 			
 			if (strcmp($password, $realPassword) == 0) 
 			{
