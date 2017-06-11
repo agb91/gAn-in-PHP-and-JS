@@ -23,6 +23,8 @@ and open the template in the editor.
     top: -131px; }
   .indexGeneral .styleArea {
     width: 103%; }
+  .indexGeneral .red-border {
+    border-color: #a94442; }
   .indexGeneral .littleRight {
     margin-left: 13px; }
   .indexGeneral .well-height-extra {

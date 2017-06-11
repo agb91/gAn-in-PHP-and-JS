@@ -28,9 +28,9 @@ $( document ).ready(function() {
     //validate( 0 );
     //validate( 1 );
 
-    /*$( "#areaBlock" ).keyup(function() {//check every time the user uses the keyboard 
-    	
-    });*/  
+    $( "#areaBlock" ).keyup(function() {//check every time the user uses the keyboard 
+    	validate( 2 );
+    });
     
     $( "#whichRunSingle" ).keyup(function() {//check every time the user uses the keyboard 
         validate( 0 );
@@ -242,7 +242,7 @@ function validate( n )
         }
 
         if (numberProblems == 0)        
-	{
+        {
             $("#warningRunNumberSingle").hide();
 	    $( "#rowOfSingleInput" ).removeClass( "has-error has-feedback" );
         }
@@ -253,7 +253,7 @@ function validate( n )
         }
 
         if (analysisProblems == 0)        
-	{
+        {
             $("#warningSelectAnalysisSingle").hide();
         }
         else
@@ -272,15 +272,15 @@ function validate( n )
             $("#sendRunButtonSingle").removeClass( "green" ).addClass( "red" );
         }
     }  
-    else // if it is multiple run
+    if( n == 1) // if it is multiple run
     {
         var insertedRun = readCleanRun( 1 );
-	var insertedRunSecond = readCleanRunSecond();
+        var insertedRunSecond = readCleanRunSecond();
         var insertedArray = insertedRun.split(";"); 
         var MultipleRuns;
        
         var numberProblems = 0;
-	var numberProblemsSecond = 0;
+        var numberProblemsSecond = 0;
         var analysisProblems = 0;
 
         //have you selected an analysis?
@@ -290,7 +290,7 @@ function validate( n )
         }
 
         for (i in insertedArray) //work on the first input field
-	{
+        {
             insertedArray[i] = insertedArray[i].trim();
             if ( acceptable ( insertedArray[ i ] ) == 1 )
             {
@@ -298,14 +298,14 @@ function validate( n )
             }
         }
 	
-	if ( acceptable ( insertedRunSecond ) == 1 )
-	{
-	    numberProblemsSecond++;
-	}
+		if ( acceptable ( insertedRunSecond ) == 1 )
+		{
+		    numberProblemsSecond++;
+		}
 
-	//related to the first input
+		//related to the first input
         if (numberProblems == 0)        
-	{
+        {
             //$( "#warningRunNumberMultiple" ).hide();
 	    $( "#rowOfMultipleInputFirst" ).removeClass( "has-error has-feedback" );
         }
@@ -315,11 +315,11 @@ function validate( n )
 	    $( "#rowOfMultipleInputFirst" ).addClass( "has-error has-feedback" );
         }
 
-	//related to the second input
+        //related to the second input
         if (numberProblemsSecond == 0)        
-	{
+        {
             //$( "#warningRunNumberMultiple" ).hide();
-	    $( "#rowOfMultipleInputSecond" ).removeClass( "has-error has-feedback" );
+        	$( "#rowOfMultipleInputSecond" ).removeClass( "has-error has-feedback" );
         }
         else
         {
@@ -327,18 +327,18 @@ function validate( n )
 	    $( "#rowOfMultipleInputSecond" ).addClass( "has-error has-feedback" );
         }
 	
-	var totNumbersProblems = numberProblems + numberProblemsSecond;
-	if( totNumbersProblems == 0 )
-	{
-	    $( "#warningRunNumberMultiple" ).hide();	
-	}
-	else
-	{
-	    $( "#warningRunNumberMultiple" ).show();	
-	}
+		var totNumbersProblems = numberProblems + numberProblemsSecond;
+		if( totNumbersProblems == 0 )
+		{
+		    $( "#warningRunNumberMultiple" ).hide();	
+		}
+		else
+		{
+		    $( "#warningRunNumberMultiple" ).show();	
+		}
 
         if (analysisProblems == 0)        
-	{
+        {
             $("#warningSelectAnalysisMultiple").hide();
         }
         else
@@ -356,7 +356,67 @@ function validate( n )
             $("#sendRunButtonMultiple").prop("disabled",true);
             $("#sendRunButtonMultiple").removeClass( "green" ).addClass( "red" );
         }
-    }  
+    }
+    if( n == 2)
+	{
+    	var textual = $( "#runsTextualInput" ).val();
+        
+    	var insertedRows = textual.split(/\r?\n/);
+        
+        var numberProblems = 0;
+        var analysisProblems = 0;
+
+        //have you selected an analysis?
+        if( $("#buttonSelectAnalysisMultiple").text() == "Select an Analysis:"  )
+        {
+            analysisProblems++;
+        }
+    	
+        for (r in insertedRows)
+    	{
+        	var insertedArray = insertedRows[r].split( "-" ); 
+        	for (i in insertedArray) 
+		    {
+        		insertedArray[i] = insertedArray[i].trim();
+                if ( acceptable ( insertedArray[ i ] ) == 1 )
+                {
+                    numberProblems++;
+                }
+		    }
+    	}
+                
+        
+        if (numberProblems == 0)        
+        {
+            $( "#runsTextualInput" ).removeClass( "red-border" );
+        }
+        else
+        {
+            $( "#runsTextualInput" ).addClass( "red-border" );
+        }
+        
+	
+        if (analysisProblems == 0)        
+        {
+            $("#warningSelectAnalysisMultiple").hide();
+        }
+        else
+        {
+            $("#warningSelectAnalysisMultiple").show();
+        }
+
+        //alert("not numeric objects: " + noNumeric);
+        if(numberProblems==0 && analysisProblems == 0)
+        {
+            $("#sendRunButtonMultiple").prop("disabled",false);
+            $("#sendRunButtonMultiple").removeClass( "red" ).addClass( "green" );        }
+        else
+        {
+            $("#sendRunButtonMultiple").prop("disabled",true);
+            $("#sendRunButtonMultiple").removeClass( "green" ).addClass( "red" );
+        }
+
+	}
 }
 
 function manageWait( n ) {
