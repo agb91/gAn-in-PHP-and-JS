@@ -39,14 +39,14 @@ function getCardinality($textMode , $whichRunFirst , $whichRunSecond)
 	
 	if( strlen( $whichRunSecond ) > 1 )
 	{ 
-		$cardinality = "multipleRange";
-		//echo $cardinality;
+		$cardinality = "multiple";
+		echo $cardinality;
 	}
 	else
 	{
 		$cardinality = "single";
 	}
-    if( $textMode == "on" )
+	if( !strlen( $whichRunFirst ) > 1 )
     {
         $cardinality = "textual";
     }
@@ -236,11 +236,11 @@ function runSingle($wr, $analisys, $gAnPath)
         //call the rooc data analisys program with the correct arguments by running a bash file
         // escapeshellarg is useful to avoid code injection
         $command = "./../Batch/genericStarter.sh " . escapeshellarg($wr ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
-    echo "<br><br> command runSingle: " . $command;    
-        
-        
-        	
-	$output = executeBash($command);
+	    echo "<br><br> command runSingle: " . $command;    
+	        
+	        
+	        	
+		$output = executeBash($command);
 	    $pieces = explode("\n", $output);//order the output in rows, not in a unique continuous stream
         $dim = count($pieces);
         $output="";

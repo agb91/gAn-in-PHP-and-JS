@@ -14,19 +14,27 @@
         include 'imagesFunctions.php';
         include 'runnerFunctions.php';
         
-        //print_r($_POST);
+        print_r($_POST);
 
+        if(  isset( $_POST["runsTextualInput"] ) )
+        {
+        	$whichRunSecond = explode( "-" , $_POST["runsTextualInput"] )[1];
+        	$whichRunFirst = explode( "-" , $_POST["runsTextualInput"] )[0];
+        
+        	$whichRunSecond = cleanString( $whichRunSecond );
+        	$whichRunFirst = cleanString( $whichRunFirst);
+        	echo "<br>textual exists: whichRunSecond: " . $whichRunSecond  . "<br>";
+        	echo "<br>textual exists: whichRunFirst: " . $whichRunFirst  . "<br>";
+        }
+        
 		//first: understand in which case we are
         if(  isset( $_POST["whichRunSecond"] ) )
         {
 			$whichRunSecond = cleanRuns( $_POST["whichRunSecond"]);
 			$whichRunSecond = cleanString( $whichRunSecond );
-			echo "<br>whichRunSecond: " . $whichRunSecond  . "<br>";
+			echo "<br>whichRunSecond definitive: " . $whichRunSecond  . "<br>";
         }
-        else 
-        {
-        	//echo "<br> second run not set";
-        }
+        
         if(  isset( $_POST["whichRun"] ) )
         {
         	$whichRunFirst = cleanRuns( $_POST["whichRun"] );
@@ -50,7 +58,7 @@
         $whichAnalysis = $_POST["selectedAnalysisSingle"];
         $whichAnalysis = $whichAnalysis . $_POST["selectedAnalysisMultiple"];
         $whichAnalysis = cleanString( $whichAnalysis );
-        //echo "<br>the read analysis is : " . $whichAnalysis;
+        echo "<br>the read analysis is : " . $whichAnalysis;
       
 
     }
@@ -137,22 +145,31 @@
             </div>
             <div>
                  <?php
-                 	$runToPrint = getRunToPrint( $cardinality , $textFromTextMode, $whichRunFirst , $whichRunSecond);	
-				    echo "<div id= 'run" . $runToPrint . "' style='display:block' name='disappearing'>";
-				    echo "<h4>Runs selected : " . $runToPrint . "<br>";
-		                    echo "Kind of analysis selected: <span id='kindAnalysis'>" . $whichAnalysis . "</span></h4><br>";
+                 	if( strcasecmp ( $cardinality, "single" ) == 0)
+                 	{
+                 		echo "<div id= 'run" . $whichRunFirst . "' style='display:block' name='disappearing'>";
+                 		echo "<h4>Run selected : " . $whichRunFirst . "<br>";
+                 	}
+                 	if( strcasecmp ( $cardinality, "multiple" ) == 0)
+                 	{
+                 		echo "<div id= 'run" . $whichRunFirst . "-" . $whichRunFirst . "' style='display:block' name='disappearing'>";
+                 		echo "<h4>Runs selected : " . $whichRunFirst . " - " . $whichRunSecond . "<br>";
+                 	}
+                 	
+                    echo "Kind of analysis selected: <span id='kindAnalysis'>" . $whichAnalysis . "</span></h4><br>";
 		                    	
-				    if( $cardinality == "textual" ) // case textual input
+                    if( strcasecmp ( $cardinality, "textual" ) == 0) // case textual input
 		            {
 						//echo "textual";
 		                $o = runRangeSheet($whichAnalysis, $gAnPath);
 		            }
-				    if( $cardinality == "single" )
+		            if( strcasecmp ( $cardinality, "single" ) == 0)
 				    {	
 						//echo "single";
 		    			$o = runSingle( $whichRunFirst, $whichAnalysis, $gAnPath);
 		    		}
-				    if ( $cardinality == "multipleRange" )
+		    		
+		    		if( strcasecmp ( $cardinality, "multiple" ) == 0)
 				    {
 						//echo "multipleRange: " . $whichRunFirst . "---" . $whichRunSecond;
 						$o = runRange( $whichRunFirst, $whichRunSecond, $whichAnalysis, $gAnPath);
@@ -192,7 +209,7 @@
             		$runs = array($whichRunFirst);
             		echo "<p id='getRuns'>" . $whichRunFirst . "</p>";
             	}
-            	if( strcasecmp ( $cardinality, "Multiple" ) == 0)
+            	else 
             	{
             		$runs = array($whichRunFirst,$whichRunSecond);
             		echo "<p id='getRuns'>" . $whichRunFirst . "-" . $whichRunSecond . "</p>";

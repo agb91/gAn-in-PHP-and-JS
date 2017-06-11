@@ -137,7 +137,7 @@
                                                 </div>
                                             </div> 
                                             <div id="areaBlock" hidden >
-                                                <textarea id="runsTextualInput" class="form-control styleArea" rows="5" ></textarea>
+                                                <textarea id="runsTextualInput" name="runsTextualInput" class="form-control styleArea" rows="5" ></textarea>
                                             </div>   
                                         </div>
                                         <div class = "col-xs-4 ridge" data-toggle='tooltip' title='Select an analysis from the dropdown menu; this will be applied to the selected run'>
@@ -172,29 +172,7 @@
                                 <br><br>
                             </div>
                             
-                            <div class="row">
-                                
-								<div class="modal fade" id="addRangeModal" role="dialog">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" id="modalCloseRange">&times;</button>
-                                                <h4><span class="glyphicon"></span> Add runs by range </h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form-group">
-                                                    <label for="newRun"><span class="glyphicon"></span> First run </label>
-                                                    <input type="text" class="form-control" id="first"></input>
-                                                    <label for="newRun"><span class="glyphicon"></span> Last run </label>
-                                                    <input type="text" class="form-control" id="last"></input>
-                                                </div>
-                                                <button class="btn btn-default btn-success btn-block" onclick="addRange()"> Add </button>
-                                            </div>
-                                        </div>    
-                                    </div>   
-                                </div>
-                            </div>
-				
+                            
 			    		<div class="row">
                                 
 						<div class="modal fade" id="inputSheetModal" role="dialog">

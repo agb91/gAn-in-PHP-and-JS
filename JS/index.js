@@ -28,6 +28,10 @@ $( document ).ready(function() {
     //validate( 0 );
     //validate( 1 );
 
+    /*$( "#areaBlock" ).keyup(function() {//check every time the user uses the keyboard 
+    	
+    });*/  
+    
     $( "#whichRunSingle" ).keyup(function() {//check every time the user uses the keyboard 
         validate( 0 );
     });  
