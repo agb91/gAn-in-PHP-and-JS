@@ -212,7 +212,7 @@ function executeBash($command)
 
         if(!feof($pipes[2]))//in this pipe errors in case of crash :(
         {
-           //$output .= stream_get_contents($pipes[2]) . '<br>';
+           $output .= stream_get_contents($pipes[2]) . '<br>';
         }
         fclose($pipes[2]);
         proc_close ( $process );//we have finished
@@ -418,13 +418,48 @@ function killZombies($z)
 }
 */
 
+function cleanTextArea( $textArea )
+{
+	
+	
+	$textArea= filter_var($textArea, FILTER_SANITIZE_STRING);
+	$textArea = cleanString( $textArea );
+	
+	
+	$TAarray = explode("\n", $textArea);
+	$re1='(\\d+)';	# Integer Number 1
+	$re2='(\\s*)';	# White Space 1
+	$re3='(-)';	# Any Single Character 1
+	$re4='(\\s*)';	# White Space 2
+	$re5='(\\d+)';	# Integer Number 2
+	
+	$textArea = "";
+	
+	foreach ($TAarray as $value)
+	{	
+		if ($c=preg_match_all ("/".$re1.$re2.$re3.$re4.$re5."/is", $value, $matches))
+		{
+			$int1=$matches[1][0];
+			$ws1=$matches[2][0];
+			$c1=$matches[3][0];
+			$ws2=$matches[4][0];
+			$int2=$matches[5][0];
+			$textArea .= $int1 . " - " . $int2 . "\n";
+		}
+		else
+		{
+			return "problem, unacceptable text area value";
+		}
+	}
+	return $textArea;
+	
+}
+
 function cleanString( $str )
 {
 	$str = trim( $str );
-	//$str = filter_var($str, FILTER_SANITIZE_STRING);
 	$str = htmlspecialchars($str, ENT_IGNORE, 'utf-8');
 	$str = strip_tags( $str );
-	//$str = filter_var($str, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 	$str = htmlentities( $str );
 	
 	//echo "<br><br><br> str here is: |" . strcmp( substr($str, -1) , ";"). "|";

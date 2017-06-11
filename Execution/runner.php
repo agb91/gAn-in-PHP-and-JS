@@ -18,6 +18,14 @@
 
         if(  isset( $_POST["runsTextualInput"] ) && strlen( $_POST["runsTextualInput"]) > 1 )
         {
+        	echo "TA before: " . $_POST["runsTextualInput"];
+
+        	
+        	$textArea = cleanTextArea($_POST["runsTextualInput"]);
+        	
+        	echo "TA after: " . $textArea;
+        	
+        	//writeTextArea($textArea);
         	$whichRunSecond = explode( "-" , $_POST["runsTextualInput"] )[1];
         	$whichRunFirst = explode( "-" , $_POST["runsTextualInput"] )[0];
         
@@ -149,18 +157,18 @@
 		                    	
                     if( strcasecmp ( $cardinality, "textual" ) == 0) // case textual input
 		            {
-						//echo "textual";
+						echo "textual";
 		                $o = runRangeSheet($whichAnalysis, $gAnPath);
 		            }
 		            if( strcasecmp ( $cardinality, "single" ) == 0)
 				    {	
-						//echo "single";
+						echo "single";
 		    			$o = runSingle( $whichRunFirst, $whichAnalysis, $gAnPath);
 		    		}
 		    		
 		    		if( strcasecmp ( $cardinality, "multiple" ) == 0)
 				    {
-						//echo "multipleRange: " . $whichRunFirst . "---" . $whichRunSecond;
+						echo "multipleRange: " . $whichRunFirst . "---" . $whichRunSecond;
 						$o = runRange( $whichRunFirst, $whichRunSecond, $whichAnalysis, $gAnPath);
 		    		}
 				    $outputBlocks = getBlocks( $o );

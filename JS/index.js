@@ -29,7 +29,7 @@ $( document ).ready(function() {
     //validate( 1 );
 
     $( "#areaBlock" ).keyup(function() {//check every time the user uses the keyboard 
-    	validate( 2 );
+    	validate( 1 );
     });
     
     $( "#whichRunSingle" ).keyup(function() {//check every time the user uses the keyboard 
@@ -89,29 +89,6 @@ function hideInputNumbers()
     {
 	$( "#opacityChanges" ).toggleClass( "transparent" );
     }
-}
-
-function saveTextualInput()
-{
-	var path = $( "#gAnPath" ).text();
-	var towrite = $( "#runsTextualInput" ).val();
-	$.get( "PHP/textualInputFunctions.php", 
-	    {
-		 whereToWrite: path , whatToWrite: towrite 
-	    } 
-	).done(function( data ) {
-	    alert( " Correctly inserted " );
-	});
-	$( "#modalCloseSheet" ).click();
-
-}
-
-function inputBySheet()
-{
-	$("#inputSheetModal").modal();
-	/*var analysis = $("#buttonSelectAnalysisMultiple").text().substring(10);
-	where = 'textualInput.php?analysis='+analysis;
-	window.location.href = where ;*/
 }
 
 //select if you want to work with single or multiple runs
@@ -346,32 +323,13 @@ function validate( n )
             $("#warningSelectAnalysisMultiple").show();
         }
 
-        //alert("not numeric objects: " + noNumeric);
-        if(numberProblems==0 && analysisProblems == 0)
-        {
-            $("#sendRunButtonMultiple").prop("disabled",false);
-            $("#sendRunButtonMultiple").removeClass( "red" ).addClass( "green" );        }
-        else
-        {
-            $("#sendRunButtonMultiple").prop("disabled",true);
-            $("#sendRunButtonMultiple").removeClass( "green" ).addClass( "red" );
-        }
-    }
-    if( n == 2)
-	{
+       
     	var textual = $( "#runsTextualInput" ).val();
         
     	var insertedRows = textual.split(/\r?\n/);
         
-        var numberProblems = 0;
-        var analysisProblems = 0;
-
-        //have you selected an analysis?
-        if( $("#buttonSelectAnalysisMultiple").text() == "Select an Analysis:"  )
-        {
-            analysisProblems++;
-        }
-    	
+        var numberProblemsText = 0;
+            	
         for (r in insertedRows)
     	{
         	var insertedArray = insertedRows[r].split( "-" ); 
@@ -380,13 +338,12 @@ function validate( n )
         		insertedArray[i] = insertedArray[i].trim();
                 if ( acceptable ( insertedArray[ i ] ) == 1 )
                 {
-                    numberProblems++;
+                	numberProblemsText++;
                 }
 		    }
     	}
                 
-        
-        if (numberProblems == 0)        
+        if (numberProblemsText == 0)        
         {
             $( "#runsTextualInput" ).removeClass( "red-border" );
         }
@@ -396,17 +353,8 @@ function validate( n )
         }
         
 	
-        if (analysisProblems == 0)        
-        {
-            $("#warningSelectAnalysisMultiple").hide();
-        }
-        else
-        {
-            $("#warningSelectAnalysisMultiple").show();
-        }
-
-        //alert("not numeric objects: " + noNumeric);
-        if(numberProblems==0 && analysisProblems == 0)
+        //alert("numProblem: " + numberProblems + ";   an problemns:" + analysisProblems);
+        if( ( numberProblemsText==0 || numberProblems==0) && analysisProblems == 0)
         {
             $("#sendRunButtonMultiple").prop("disabled",false);
             $("#sendRunButtonMultiple").removeClass( "red" ).addClass( "green" );        }

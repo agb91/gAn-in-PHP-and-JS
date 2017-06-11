@@ -2,6 +2,6 @@
 
 source /home/andrea/Downloads/buildRoot/bin/thisroot.sh
 
-cd $3
+cd $2
 
-root -l -b rungAn.C\(\"$1\"\,\"$2\"\,true\)
+root -l -b rungAn.C\(\"textArea.txt\"\,\"$1\"\,true\)

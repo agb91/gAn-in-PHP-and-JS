@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo whoami
-
-whoami
-
 source /home/andrea/Downloads/buildRoot/bin/thisroot.sh
 
 cd $3
