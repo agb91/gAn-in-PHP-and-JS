@@ -14,9 +14,9 @@
         include 'imagesFunctions.php';
         include 'runnerFunctions.php';
         
-        print_r($_POST);
+        //print_r($_POST);
 
-        if(  isset( $_POST["runsTextualInput"] ) )
+        if(  isset( $_POST["runsTextualInput"] ) && strlen( $_POST["runsTextualInput"]) > 1 )
         {
         	$whichRunSecond = explode( "-" , $_POST["runsTextualInput"] )[1];
         	$whichRunFirst = explode( "-" , $_POST["runsTextualInput"] )[0];
@@ -30,31 +30,20 @@
 		//first: understand in which case we are
         if(  isset( $_POST["whichRunSecond"] ) )
         {
-			$whichRunSecond = cleanRuns( $_POST["whichRunSecond"]);
-			$whichRunSecond = cleanString( $whichRunSecond );
+        	$whichRunSecond = cleanString( $_POST["whichRunSecond"]);
 			echo "<br>whichRunSecond definitive: " . $whichRunSecond  . "<br>";
         }
         
         if(  isset( $_POST["whichRun"] ) )
         {
-        	$whichRunFirst = cleanRuns( $_POST["whichRun"] );
-        	$whichRunFirst = cleanString( $whichRunFirst );
-			echo "<br> whichRunFirst: " . $whichRunFirst  . "<br>";
+        	$whichRunFirst = cleanString( $_POST["whichRun"]);
+			echo "<br> whichRunFirst definitive: " . $whichRunFirst  . "<br>";
         }
-        else
-        {
-        	//echo "<br> second run not set";
-        }
-		
+        
         $cardinality = getCardinality($textMode , $whichRunFirst , $whichRunSecond);
 		echo "<br> cardinality: " . $cardinality;
-		if( $cardinality == "textual" )
-		{
-        	$textFromTextMode = fileReaderGeneral("../runSheet.txt");
-        	//echo "<br> textFromSheet: " . $textFromTextMode;
-        	
-		}
-        
+		
+		
         $whichAnalysis = $_POST["selectedAnalysisSingle"];
         $whichAnalysis = $whichAnalysis . $_POST["selectedAnalysisMultiple"];
         $whichAnalysis = cleanString( $whichAnalysis );

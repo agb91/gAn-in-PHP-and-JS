@@ -212,10 +212,11 @@ function executeBash($command)
 
         if(!feof($pipes[2]))//in this pipe errors in case of crash :(
         {
-           $output .= stream_get_contents($pipes[2]) . '<br>';
+           //$output .= stream_get_contents($pipes[2]) . '<br>';
         }
         fclose($pipes[2]);
         proc_close ( $process );//we have finished
+        echo $output;
  	return $output;
 }
 
@@ -264,35 +265,15 @@ function runSingle($wr, $analisys, $gAnPath)
 function runRange($wr1, $wr2, $analisys, $gAnPath)
 {
     //echo 'path now: '. $gAnPath . ' <br> ';
-    
-    if ( !is_numeric($wr1) )
-    {
-        echo "inserted run: " . $wr1;
-        echo "Inserted run is not acceptable";
-        $wr1 = 0;
-    }
-
-    if ( !is_numeric($wr2) )
-    {
-        echo "inserted run: " . $wr2;
-        echo "Inserted run is not acceptable";
-        $wr2 = 0;
-    }
-
-    if( isAnalysisSafe( $analisys ) == 1 )
-    {
-        //echo "selected analysis is not acceptable";
-        $analisys = "---";
-    }
 
     $output="";
     try 
     {
         //call the rooc data analisys program with the correct arguments by running a bash file
         // escapeshellarg is useful to avoid code injection
-        $command = "./../Batch/gAnShStarterMultiple.sh " . escapeshellarg( $wr1 ) . " ". escapeshellarg( $wr2 ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
+    	$command = "./../Batch/genericStarterMultiple.sh " . escapeshellarg( $wr1 ) . " ". escapeshellarg( $wr2 ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
         
-	$output = executeBash($command);
+		$output = executeBash($command);
 
         $pieces = explode("\n", $output);//order the output in rows, not in a unique continuous stream
         $dim = count($pieces);
@@ -327,7 +308,7 @@ function runRangeSheet($analisys, $gAnPath)
     {
         //call the rooc data analisys program with the correct arguments by running a bash file
         // escapeshellarg is useful to avoid code injection
-        $command = "./../Batch/gAnShStarterMultipleSheet.sh " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
+    	$command = "./../Batch/genericStarterTextual.sh " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
         
 	$output = executeBash($command);
 
@@ -357,7 +338,7 @@ function runRangeSheet($analisys, $gAnPath)
  * be sure of the cleaning of the system after the Root-gAn running. Thi function
  * return the array of the IDs 
  */
-
+/*
 function findZombies()//used only on Andrea's pc, just for tests 
 {
     $command = "./findZombies.sh ";
@@ -435,7 +416,7 @@ function killZombies($z)
 	killThis($thisID);	
     } 
 }
-
+*/
 
 function cleanString( $str )
 {
