@@ -15,40 +15,35 @@
         include 'runnerFunctions.php';
         
         //print_r($_POST);
-
+	
         if(  isset( $_POST["runsTextualInput"] ) && strlen( $_POST["runsTextualInput"]) > 1 )
         {
-        	echo "TA before: " . $_POST["runsTextualInput"];
+        	//echo "TA before: " . $_POST["runsTextualInput"];
 
         	
         	$textArea = cleanTextArea($_POST["runsTextualInput"]);
+        	writeToTextArea( $textArea );	
+        	//echo "<br>TA after: " . $textArea;
         	
-        	echo "TA after: " . $textArea;
-        	
-        	//writeTextArea($textArea);
-        	$whichRunSecond = explode( "-" , $_POST["runsTextualInput"] )[1];
-        	$whichRunFirst = explode( "-" , $_POST["runsTextualInput"] )[0];
-        
-        	$whichRunSecond = cleanString( $whichRunSecond );
-        	$whichRunFirst = cleanString( $whichRunFirst);
-        	echo "<br>textual exists: whichRunSecond: " . $whichRunSecond  . "<br>";
-        	echo "<br>textual exists: whichRunFirst: " . $whichRunFirst  . "<br>";
+        	$whichRunSecond = "-";
+        	$whichRunFirst = "-";
+        	echo "<br>textual input is: " . $textArea;
         }
         
 		//first: understand in which case we are
-        if(  isset( $_POST["whichRunSecond"] ) )
+        if(  isset( $_POST["whichRunSecond"] ) && strlen( $_POST["whichRunSecond"]) > 1 )
         {
         	$whichRunSecond = cleanString( $_POST["whichRunSecond"]);
 			echo "<br>whichRunSecond definitive: " . $whichRunSecond  . "<br>";
         }
         
-        if(  isset( $_POST["whichRun"] ) )
+        if(  isset( $_POST["whichRun"] ) && strlen( $_POST["whichRun"]) > 1 )
         {
         	$whichRunFirst = cleanString( $_POST["whichRun"]);
 			echo "<br> whichRunFirst definitive: " . $whichRunFirst  . "<br>";
         }
         
-        $cardinality = getCardinality($textMode , $whichRunFirst , $whichRunSecond);
+        $cardinality = getCardinality($whichRunFirst , $whichRunSecond);
 		echo "<br> cardinality: " . $cardinality;
 		
 		
@@ -157,8 +152,8 @@
 		                    	
                     if( strcasecmp ( $cardinality, "textual" ) == 0) // case textual input
 		            {
-						echo "textual";
-		                $o = runRangeSheet($whichAnalysis, $gAnPath);
+		            	echo "<div style='display:block' name='disappearing'>";
+		            	echo "<h4>Runs selected : textFile <br>";
 		            }
 		            if( strcasecmp ( $cardinality, "single" ) == 0)
 				    {	
@@ -171,6 +166,13 @@
 						echo "multipleRange: " . $whichRunFirst . "---" . $whichRunSecond;
 						$o = runRange( $whichRunFirst, $whichRunSecond, $whichAnalysis, $gAnPath);
 		    		}
+		    		
+		    		if( strcasecmp ( $cardinality, "textual" ) == 0)
+		    		{
+		    			echo "textual: ";
+		    			$o = runTextual($whichAnalysis, $gAnPath);
+		    		}
+		    		
 				    $outputBlocks = getBlocks( $o );
 		            printBlocks( $outputBlocks );
 				    echo "</div>";

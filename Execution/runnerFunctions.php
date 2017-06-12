@@ -32,25 +32,21 @@ function getRunToPrint( $cardinality , $textFromTextMode, $whichRunFirst , $whic
 }
 
 //in which situation are we?
-function getCardinality($textMode , $whichRunFirst , $whichRunSecond)
+function getCardinality($whichRunFirst , $whichRunSecond)
 {
-    $cardinality = "";
-
+	echo "<br> getCard input: |" . $whichRunFirst  . "| , |" . $whichRunSecond . "|";
+	$cardinality = "textual";
 	
-	if( strlen( $whichRunSecond ) > 1 )
-	{ 
-		$cardinality = "multiple";
-		echo $cardinality;
-	}
-	else
+	if( strlen( $whichRunFirst ) > 1 )
 	{
 		$cardinality = "single";
 	}
-	if( !strlen( $whichRunFirst ) > 1 )
-    {
-        $cardinality = "textual";
-    }
-	echo "<span hidden id='cardinality'>".$cardinality."</span>";
+	if( strlen( $whichRunSecond ) > 1 )
+	{
+		$cardinality = "multiple";
+	}
+	
+    echo "<span hidden id='cardinality'>".$cardinality."</span>";
 	return $cardinality;
 }
 
@@ -216,8 +212,7 @@ function executeBash($command)
         }
         fclose($pipes[2]);
         proc_close ( $process );//we have finished
-        echo $output;
- 	return $output;
+    return $output;
 }
 
 
@@ -293,40 +288,33 @@ function runRange($wr1, $wr2, $analisys, $gAnPath)
 }
 
 
-function runRangeSheet($analisys, $gAnPath)
+function runTextual($analisys, $gAnPath)
 {
-
-
-    if( isAnalysisSafe( $analisys ) == 1 )
-    {
-        //echo "selected analysis is not acceptable";
-        $analisys = "---";
-    }
-
-    $output="";
-    try 
-    {
-        //call the rooc data analisys program with the correct arguments by running a bash file
-        // escapeshellarg is useful to avoid code injection
-    	$command = "./../Batch/genericStarterTextual.sh " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
-        
-	$output = executeBash($command);
-
-        $pieces = explode("\n", $output);//order the output in rows, not in a unique continuous stream
-        $dim = count($pieces);
-        $output="";
-        for ($i = 0; $i < $dim; $i++) {
-            $output .= $pieces[$i] . "<br>";
-        }
-    }
-    catch (Exception $e)//is it necessary? this part of program never crashes until today
-    {
-        echo 'Caught exception: ',  $e->getMessage(), "\n";
-        proc_close ( $process );// kill if killable..
-        fclose($pipes[0]);
-        fclose($pipes[1]);
-    }
-    return $output;
+	
+	$output="";
+	try
+	{
+		//call the rooc data analisys program with the correct arguments by running a bash file
+		// escapeshellarg is useful to avoid code injection
+		$command = "./../Batch/genericStarterTextual.sh " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
+		
+		$output = executeBash($command);
+		
+		$pieces = explode("\n", $output);//order the output in rows, not in a unique continuous stream
+		$dim = count($pieces);
+		$output="";
+		for ($i = 0; $i < $dim; $i++) {
+			$output .= $pieces[$i] . "<br>";
+		}
+	}
+	catch (Exception $e)//is it necessary? this part of program never crashes until today
+	{
+		echo 'Caught exception: ',  $e->getMessage(), "\n";
+		proc_close ( $process );// kill if killable..
+		fclose($pipes[0]);
+		fclose($pipes[1]);
+	}
+	return $output;
 }
 
 
@@ -417,6 +405,13 @@ function killZombies($z)
     } 
 }
 */
+
+function writeToTextArea( $txt )
+{
+	$myfile = fopen("../Batch/textArea.txt", "w");
+	fwrite($myfile, $txt);
+	fclose($myfile);
+}
 
 function cleanTextArea( $textArea )
 {
