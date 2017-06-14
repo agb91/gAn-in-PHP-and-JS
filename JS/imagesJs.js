@@ -1,15 +1,15 @@
-//alert("loaded");
+//("loaded");
 
 function showSingleImage(n)
 {
     if ( $( "#inputCheckValue"+n ).is( ":checked" ) ) 
     {
-         //alert( "I'll show image: " + n );
+         //( "I'll show image: " + n );
 	 $( "#image" + n ).show();
     }
     else
     {
-	//alert( "I'll hide image: " + n );
+	//( "I'll hide image: " + n );
         $( "#image" + n ).hide();
     }
 }
@@ -21,7 +21,7 @@ function showImages()
     $( "#picturesTab" ).show();  
         
     //var arraySvgIcons = $("[name='ToggleZoom']");
-    //alert( arraySvgIcons.length );    
+    //( arraySvgIcons.length );    
 }
 
 // if the user clicks on "textual" on the navbar
@@ -45,16 +45,16 @@ function img_find() {
 function downloadImages()
 {
     var list = document.getElementsByTagName("svg");
-    //alert( list[0] );
+    //( list[0] );
     for( i = 0; i < list.length; i++)
     {
         var svgData = list[ i ].outerHTML;
-        //alert(svgData);
+        //(svgData);
         //if( svgData.indexOf( '<svg class="jsroot root_canvas"' ) !== -1)
             
         if( svgData.indexOf( 'jsroot' ) !== -1)    
         {
-            //alert( svgData );
+            //( svgData );
             var svgBlob = new Blob([svgData], {type:"image/svg+xml;charset=utf-8"});
             var svgUrl = URL.createObjectURL(svgBlob);
             var downloadLink = document.createElement("a");
@@ -209,25 +209,22 @@ function updateGUI()
 	
 	//var groups = $( "#hereTheGroups").text();
 	//var groupsArray = groups.split("-");
-	//alert( groupsArray );
+	//( groupsArray );
 
 	var cardinality = $( "#cardinality" ).text();
-	//alert(cardinality);	
+	//(cardinality);	
 	//console.log(runsArray);
 
 	if (cardinality == "Single" || cardinality == "single")
 	{
-		alert("single: runarray is: " + runsArray);
 		manageImagesSingle(runsArray);
 	}
 	if (cardinality == "Multiple" || cardinality == "multiple")
 	{
-		alert("multiple: runarray is: " + runsArray);
 		manageImagesMultiple(runsArray);   
 	} 
 	if (cardinality == "Textual" || cardinality == "textual")
 	{
-		alert("textual: runarray is: " + runsArray);
 		manageImagesTextual(runsArray);   
 	} 
 

@@ -46,7 +46,7 @@ function writeToFile(file)
     {
         toAlert+= groups[i] + " : " + values[i] + " \n ";
     }
-    //alert(toAlert);
+ 
 
     var toHref = "";
     toHref = 'PHP/editConfigFunction.php/?';
@@ -62,7 +62,7 @@ function writeToFile(file)
         }        
     }
     toHref+="&path=" + file;
-    //alert( toHref );
+  
     window.location.href = toHref;
 }
 

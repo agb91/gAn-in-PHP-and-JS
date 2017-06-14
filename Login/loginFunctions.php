@@ -10,9 +10,9 @@
 		else
 		{
 			$password=$_POST['password'];
-			$realPassword = "test";
-
-			if (strcmp($password, $realPassword) == 0) 
+			$realPassword = "975cc36a3d025867b93bc724481aff55";
+			
+			if (strcmp( md5($password) , $realPassword) == 0) 
 			{
 				$_SESSION['logged']="logged"; // Initializing Session
 				echo "session now : " . $_SESSION['logged'];

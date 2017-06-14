@@ -170,7 +170,6 @@ function readCleanRun( n )
     {
         insertedRun = insertedRun.substr( 0 , insertedRun.length - 1 );
     }
-    //alert( insertedRun + "---");
     return insertedRun;
 }
 
@@ -180,13 +179,11 @@ function selectDate( thisDate )
     var dates = dates.split( ";-;" );
     //var rex = /\S/;
     //dates = dates.filter(rex.test.bind(rex));
-    //alert(dates[0]);
     for( var i = 0; i < dates.length ; i++)
     {
         $( "#run" + i ).hide();    
     }
     $( "#run" + thisDate ).show();
-    //alert($("#run"+thisDate);
 }
 
 //divide the string by semi-colon, point, comma (all accepted divisors), check if the chucks are numbers
@@ -208,7 +205,6 @@ function validate( n )
         if( $("#buttonSelectAnalysisSingle").text() == "Select an Analysis:"  )
         {
             analysisProblems++;
-            //alert("analysis problems");
         }
         for (i in insertedArray) {
             insertedArray[i] = insertedArray[i].trim();
@@ -238,7 +234,6 @@ function validate( n )
             $("#warningSelectAnalysisSingle").show();
         }
 
-        //alert("not numeric objects: " + noNumeric);
         if(numberProblems==0 && analysisProblems == 0)
         {
             $("#sendRunButtonSingle").prop("disabled",false);
@@ -353,7 +348,6 @@ function validate( n )
         }
         
 	
-        //alert("numProblem: " + numberProblems + ";   an problemns:" + analysisProblems);
         if( ( numberProblemsText==0 || numberProblems==0) && analysisProblems == 0)
         {
             $("#sendRunButtonMultiple").prop("disabled",false);
@@ -372,47 +366,19 @@ function manageWait( n ) {
     $( "#commonSemiTop" ).hide();
     $( "#workBlock" ).hide();
     $( "#modalityWell").hide();
-    //alert( $( "#commonWait") );
     //$( "#commonWait").show();
     w = document.getElementById("commonWait");
     w.style.display = 'block';//show the label with "wait until...."
    
-    /*if( n == 0)
-    {
-        w = document.getElementById("waitSingle");
-        w.style.display = 'block';//show the label with "wait until...."
-    }
-    else
-    {
-        w = document.getElementById("waitMultiple");
-        w.style.display = 'block';//show the label with "wait until...."
-    }*/
+
 }
 
-/*
-open the modal that allows to insert multiple runs by range (from run .. to run ..)
-*/
-function addRangeModal(){
-    $("#addRangeModal").modal();
-}
-/*
-function changeRootModal(){
-    $("#changeRootModal").modal();
-}
-
-function changeRootPath()
-{
-    var newRootFile = $("#newRoot").val();
-    //alert("new rootPath is:" + newRootFile);
-}*/
 
 //check if there is another chunk with the same name, (double runs are useless)
 function checkAlreadyExist(needle)
 {
         needle = " " + needle; //javascript wants a string or it will crash with the trim....
-        //alert("needle: " + needle);
         haystack = $("#whichRunsMultiple").val().split(";");
-        //alert("haystack: " + haystack);
         var alreadyExist = false;
         for (i in haystack) 
         {
@@ -428,43 +394,6 @@ function checkAlreadyExist(needle)
 /*
 add the range of runs written in the modal to the input form
 */
-function addRange()
-{
-    var first = $("#first").val().trim();
-    var last = $("#last").val().trim();
-    //alert(first + "--" + last);
-    if(parseInt(first)>=parseInt(last))//the first run obviously cannot have a value < the last run..
-    {
-        alert("Fist must be less than Last..");
-        $("#modalCloseRange").click();
-    }
-    else
-    {
-        for (r = first; r <= last; r++) 
-        { 
-            //console.log("r: " + r);
-            if(acceptable(r)==0 && !checkAlreadyExist(r))
-            {            
-                //alert("All is acceptable");
-                old = $("#whichRunsMultiple").val();
-                //alert("old is :  " + old);    
-                if(old.length!==0)
-                {
-                    var newNumber = old + "; " + r;
-                }      
-                else
-                {
-                    newNumber = r;
-                }  
-                newNumber = newNumber.replace(";;", ";"); 
-                $("#whichRunsMultiple").val(newNumber);
-            }
-        }
-    }
-    $("#modalCloseRange").click();//exit the modal, return to home.
-    validate(); // recheck the send button (is the input acceptable?)
-}
-
 //write which analysis the user chooses 
 function setAnalysis( i , n )
 {
@@ -484,7 +413,6 @@ function setAnalysis( i , n )
         $("#selectedAnalysisMultiple").val(selectedAnalysis);
         $("#buttonSelectAnalysisMultiple").text("Selected: " + selectedAnalysis);
     }
-    //alert(selectedAnalysis);
     validate( n );
 }
 
@@ -492,7 +420,6 @@ function setAnalysis( i , n )
 // 0=good;      1=bad
 function acceptable( r )
 {
-    //alert(r);
     //console.log(r);
     var risp = 1;
     if($.isNumeric(r) )

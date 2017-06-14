@@ -34,7 +34,7 @@ function getRunToPrint( $cardinality , $textFromTextMode, $whichRunFirst , $whic
 //in which situation are we?
 function getCardinality($whichRunFirst , $whichRunSecond)
 {
-	echo "<br> getCard input: |" . $whichRunFirst  . "| , |" . $whichRunSecond . "|";
+	//echo "<br> getCard input: |" . $whichRunFirst  . "| , |" . $whichRunSecond . "|";
 	$cardinality = "textual";
 	
 	if( strlen( $whichRunFirst ) > 1 )
@@ -224,7 +224,7 @@ function executeBash($command)
  */
 function runSingle($wr, $analisys, $gAnPath)
 {
-	echo "<br><br> analisys: " . $wr;
+	//echo "<br><br> analisys: " . $wr;
 	
     $output="";
     try 
@@ -232,7 +232,7 @@ function runSingle($wr, $analisys, $gAnPath)
         //call the rooc data analisys program with the correct arguments by running a bash file
         // escapeshellarg is useful to avoid code injection
         $command = "./../Batch/genericStarter.sh " . escapeshellarg($wr ) . " " . escapeshellarg($analisys) . " " . escapeshellarg($gAnPath);
-	    echo "<br><br> command runSingle: " . $command;    
+	    //echo "<br><br> command runSingle: " . $command;    
 	        
 	        
 	        	

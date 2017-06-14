@@ -27,30 +27,30 @@
         	
         	$whichRunSecond = "-";
         	$whichRunFirst = "-";
-        	echo "<br>textual input is: " . $textArea;
+        	//echo "<br>textual input is: " . $textArea;
         }
         
 		//first: understand in which case we are
         if(  isset( $_POST["whichRunSecond"] ) && strlen( $_POST["whichRunSecond"]) > 1 )
         {
         	$whichRunSecond = cleanString( $_POST["whichRunSecond"]);
-			echo "<br>whichRunSecond definitive: " . $whichRunSecond  . "<br>";
+			//echo "<br>whichRunSecond definitive: " . $whichRunSecond  . "<br>";
         }
         
         if(  isset( $_POST["whichRun"] ) && strlen( $_POST["whichRun"]) > 1 )
         {
         	$whichRunFirst = cleanString( $_POST["whichRun"]);
-			echo "<br> whichRunFirst definitive: " . $whichRunFirst  . "<br>";
+			//echo "<br> whichRunFirst definitive: " . $whichRunFirst  . "<br>";
         }
         
         $cardinality = getCardinality($whichRunFirst , $whichRunSecond);
-		echo "<br> cardinality: " . $cardinality;
+		//echo "<br> cardinality: " . $cardinality;
 		
 		
         $whichAnalysis = $_POST["selectedAnalysisSingle"];
         $whichAnalysis = $whichAnalysis . $_POST["selectedAnalysisMultiple"];
         $whichAnalysis = cleanString( $whichAnalysis );
-        echo "<br>the read analysis is : " . $whichAnalysis;
+        //echo "<br>the read analysis is : " . $whichAnalysis;
       
 
     }
@@ -157,19 +157,19 @@
 		            }
 		            if( strcasecmp ( $cardinality, "single" ) == 0)
 				    {	
-						echo "single";
+						//echo "single";
 		    			$o = runSingle( $whichRunFirst, $whichAnalysis, $gAnPath);
 		    		}
 		    		
 		    		if( strcasecmp ( $cardinality, "multiple" ) == 0)
 				    {
-						echo "multipleRange: " . $whichRunFirst . "---" . $whichRunSecond;
+						//echo "multipleRange: " . $whichRunFirst . "---" . $whichRunSecond;
 						$o = runRange( $whichRunFirst, $whichRunSecond, $whichAnalysis, $gAnPath);
 		    		}
 		    		
 		    		if( strcasecmp ( $cardinality, "textual" ) == 0)
 		    		{
-		    			echo "textual: ";
+		    			//echo "textual: ";
 		    			$o = runTextual($whichAnalysis, $gAnPath);
 		    		}
 		    		
@@ -206,12 +206,12 @@
             	if( strcasecmp ( $cardinality, "Single" ) == 0)
             	{
             		$runs = array($whichRunFirst);
-            		echo "<p id='getRuns'>" . $whichRunFirst . "</p>";
+            		echo "<p hidden id='getRuns'>" . $whichRunFirst . "</p>";
             	}
             	else 
             	{
             		$runs = array($whichRunFirst,$whichRunSecond);
-            		echo "<p id='getRuns'>" . $whichRunFirst . "-" . $whichRunSecond . "</p>";
+            		echo "<p hidden id='getRuns'>" . $whichRunFirst . "-" . $whichRunSecond . "</p>";
             	}
             	
                 

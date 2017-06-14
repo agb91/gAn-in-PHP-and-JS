@@ -35,8 +35,6 @@ function updateGUI() {
              case 3: val = 19 - ix + iy; break;
              default: val = ix + iy; break;
           }
-          //alert("val: "+val);
-          //alert("bin: "+bin);
           histo.setBinContent(bin, val);
        }
 
