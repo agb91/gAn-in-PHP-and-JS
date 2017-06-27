@@ -37,33 +37,11 @@
             </div>
         </div>
         <div id = "commonSemiTop" class="row releaseAegis">
-           	<div id='chooseModality' class='row'>
-				<h3 class = 'center' > Choose your modality: Single Run vs Multiple Runs</h3>
-				<div class='col-xs-4'></div>
-				<div class='col-xs-4'>
-			    	<div class='row'>
-					    <div class = 'col-xs-6' >
-					    	<button id='choice0' data-toggle='tooltip' title='This modality allows you to analyze only one run at time, and to access only the single-run pre-existing analyzes' class='btn btn-primary center' onclick='selectSingleVsMultiple(0)'> Work with a Single Run </button>
-					  	</div>
-					  	<div class = 'col-xs-6' >
-					  		<button id='choice1' data-toggle='tooltip' title='This modality allows you to analyze many runs at time, and to access only the multiple-runs pre-existing analyzes' class='btn btn-primary center' onclick='selectSingleVsMultiple(1)'> Work with Multiple Runs </button>
-					    </div>
-				    </div>
-			    </div>
-			    <div class='col-xs-4'></div>
-			</div>
-		    <div hidden id='changeModality' class='row' >
-			    <div class='col-xs-4'></div>
-				<div class='col-xs-4'>
-					<button id='modalityNow' data-toggle = 'tooltip' title = 'Return to the previous screen, where you will able to choose another modality (single run vs multiple run)'  class='btn btn-primary center' onclick='changeModality()'>Return to "Choose Modality" Single vs Multiple</button>
-			    </div>
-			    <div class='col-xs-4'></div>
-		    </div>
-        </div>
+       	</div>
         
         
         
-        <div hidden id="workBlock" >
+        <div >
             <div class="row">
                 <div class="col-xs-7" style="margin-left: 20.8%;">
                     <div class="borderGroup">
@@ -72,21 +50,8 @@
 
 
 
-
-
-
-
-
-
-
 <!-- multiple input -->
 
-
-
-
-
-
-		
 
                         <div id="multiple"> 
                             <div class="col-xs-12">    
@@ -160,7 +125,7 @@
                                             <div class = "row" >
 						<div class="col-xs-3"></div>
                                                 <div id = "mouseOverTargetMultiple" class="col-xs-6 starter">
-                                                    <button id="sendRunButtonMultiple" data-toggle="tooltip" title="Start the program with the inserted runs" onclick="manageWait( 1 )" type="submit" class="btn btn-primary starterButton"> Start </button>
+                                                    <button id="sendRunButtonMultiple" data-toggle="tooltip" title="Start the program with the inserted runs" onclick="manageWait()" type="submit" class="btn btn-primary starterButton"> Start </button>
                                                 </div>
                                             </div> 
                                         </div>    
@@ -204,100 +169,6 @@
 	                    </div>
 		            </div>   
                	</div>
-
-
-
-
-
-
-
-
-
-<!-- single input -->
-
-
-
-
-
-
-
-
-
-
-
-                        <div id="single">    
-                            <div class="col-xs-12">    
-                                <div class="row"><!-- run row -->
-                                    <h3>  
-                                        <span data-toggle='tooltip' title='This is the most recent run in the database'>
-                                            Last existing run: 
-                                            <?php
-                                                lastRun($dirRawFiles);
-                                            ?>
-                                        </span>
-                                    </h3>
-                                </div>
-                                
-                                <form class = "well well-height" action="../Execution/runner.php" method="post">
-                                    <div class = "row" >
-                                        <div class = "col-xs-6 ridge">
-                                            <div class = "row  centerTextAlign" >
-                                                <label for="whichRunSingle" class="form-control-label">Insert a Run: </label>
-                                            </div>   
-                                            <div id="rowOfSingleInput" class = "row" >
-                                                <input type="text" data-toggle="tooltip" title="Insert here a run number, on which the selected single-run analysis will be applied." id="whichRunSingle" name="whichRun" class="form-control littlePadding" placeholder="example: 30000">
-                                            </div> 
-                                            <div class = "row  centerTextAlign" >
-                                                <h4 id="warningRunNumberSingle">
-                                                    <div style="color: red;"><span class="glyphicon glyphicon-remove"></span> Insert a number (only one!), without letters!</div>
-                                                </h4>
-                                            </div>
-                                        </div>
-                                        <div class = "col-xs-4 ridge" data-toggle='tooltip' title='Select an analysis from the dropdown menu; this will be applied to the selected run'>
-                                            <div class = "row centerTextAlign" >
-                                                <label for="buttonSelectAnalysisSingle" class="form-control-label">Choose an analysis</label>
-                                            </div>   
-                                            <div class = "row centerTextAlign" >
-                                                <?php readAnalyzes( $allAnalyzesSingle , $allAnalyzesMore, 0); ?>
-                                            </div> 
-                                            <div class = "row centerTextAlign" >
-                                                <h4 id="warningSelectAnalysisSingle">
-                                                    <div style="color: red;"><span class="glyphicon glyphicon-remove"></span> Select an analysis!</div>
-                                                </h4>
-                                            </div>
-                                        </div>    
-                                        <div class = "col-xs-2">
-                                            <div class = "row" >
-                                                <label class="form-control-label littleRight"><div hidden class = "col-xs-2"> place </div></label> 
-                                            </div>   
-                                            <div class = "row" >
-												<div class="col-xs-3"></div>
-                                                <div id = "mouseOverTargetSingle" class="col-xs-6 starter">
-                                                    <button id="sendRunButtonSingle" data-toggle="tooltip" title="Start the program with the inserted run" onclick="manageWait( 0 )" type="submit" class="btn btn-primary starterButton"> Start </button>
-                                                </div>
-                                            </div> 
-                                            <div class = "row" >
-                                            </div>
-                                        </div>    
-                                    </div>       
-                                </form>
-                                <br><br>
-                            </div>    
- 			    	<div class="row">	
-	   			        <div class = "col-xs-4 centerTextAlign" >
-					    	<button onclick="window.location.href='../Configuration/editConfig.php'" type="submit" class="settingButton btn btn-primary moveUpSetting"> Advanced Settings</button>			
-				        </div>    
-				        <div class="col-xs-4 centerTextAlign"></div>
-				        <div class="col-xs-4 centerTextAlign"></div>
-		            </div>                         
-			</div> 
-                        <br><br>
-
-
-
-
-<!-- Single part finishes here -->
-
 
 
 

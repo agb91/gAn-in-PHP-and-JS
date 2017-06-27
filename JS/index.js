@@ -16,54 +16,33 @@ $( document ).ready(function() {
     //first of all, disable the run-send-button (until the run number isn't correct)
     //$( "#sendRunButtonSingle" ).prop("disabled",true);
     $( "#sendRunButtonSingle" ).prop("disabled",true);
-    $( "#warningRunNumberSingle" ).hide();
     $( "#sendRunButtonMultiple" ).prop("disabled",true);
     $( "#warningRunNumberMultiple" ).hide();
-    $( "#warningSelectAnalysisSingle" ).hide();
     $( "#warningSelectAnalysisMultiple" ).hide();
 
-    //$( "#advancedSettings" ).css({top: 554});
-
-    //check if the run-number make sense, and at that moment unlock the send-run-button
-    //validate( 0 );
-    //validate( 1 );
-
     $( "#areaBlock" ).keyup(function() {//check every time the user uses the keyboard 
-    	validate( 1 );
+    	validate();
     });
     
-    $( "#whichRunSingle" ).keyup(function() {//check every time the user uses the keyboard 
-        validate( 0 );
-    });  
     $( "#whichRunsMultiple" ).keyup(function() {//check every time the user uses the keyboard 
-        validate( 1 );
+        validate();
     });
     $( "#whichRunsMultipleSecond" ).keyup(function() {//check every time the user uses the keyboard 
-        validate( 1 );
+        validate();
     });	
 
-    $( "#buttonSelectAnalysisSingle" ).click(function() {//check every time the user click this button
-        validate( 0 );
-    });
     $( "#buttonSelectAnalysisMultiple" ).click(function() {//check every time the user click this button
-        validate( 1 );
+        validate();
     });
-    
-    $( "#whichRunSingle" ).click(function() {//check every time the user clicks with the mouse on the input form
-        validate( 0 );
-    });  
     $( "#whichRunsMultiple" ).click(function() {//check every time the user clicks with the mouse on the input form
-        validate( 1 );
+        validate();
     });
     $( "#whichRunsMultipleSecond" ).click(function() {//check every time the user clicks with the mouse on the input form
-        validate( 1 );
+        validate();
     });
 
-    $( "#mouseOverTargetSingle" ).mouseover(function() {
-        validate( 0 );
-    });
     $( "#mouseOverTargetMultiple" ).mouseover(function() {
-        validate( 1 );
+        validate();
     });
 });
 
@@ -151,17 +130,10 @@ function readCleanRunSecond() // the second run in the multiple case is particul
 }
 
 //it is a good idea if we standardize comma and '-' with semicolon
-function readCleanRun( n )
+function readCleanRunFirst()
 {
     var insertedRun = " ";
-    if( n == 0)
-    {
-        insertedRun = $("#whichRunSingle").val();
-    }
-    else
-    {
-        insertedRun = $("#whichRunsMultiple").val();
-    }
+    insertedRun = $("#whichRunsMultiple").val();
     insertedRun = insertedRun.replace(new RegExp(",", "g"), ";");// we want to allow the user to separate the run numbers 
     //also with comma and '-' and point
     insertedRun = insertedRun.replace(new RegExp("-", "g"), ";");
@@ -186,182 +158,119 @@ function selectDate( thisDate )
     $( "#run" + thisDate ).show();
 }
 
-//divide the string by semi-colon, point, comma (all accepted divisors), check if the chucks are numbers
-function validate( n ) 
+function validate( ) 
 {
-    if( n == 0)// if is single run
+    var insertedRunFirst = readCleanRunFirst();
+    var insertedRunSecond = readCleanRunSecond();
+    var MultipleRuns;
+   
+    var numberProblemsFirst = 0;
+    var numberProblemsSecond = 0;
+    var analysisProblems = 0;
+
+    //have you selected an analysis?
+    if( $("#buttonSelectAnalysisMultiple").text() == "Select an Analysis:"  )
     {
-        var insertedRun = readCleanRun( 0 );
-        var insertedArray = insertedRun.split(";"); 
-        var singleRun;
-       
-        var numberProblems = 0;
-        var analysisProblems = 0;
-        if ( insertedArray.length > 1 )
-        {
-            numberProblems++;
-        }
-        //have you selected an analysis?
-        if( $("#buttonSelectAnalysisSingle").text() == "Select an Analysis:"  )
-        {
-            analysisProblems++;
-        }
-        for (i in insertedArray) {
-            insertedArray[i] = insertedArray[i].trim();
-            if ( acceptable ( insertedArray[ i ] ) == 1 )
-            {
-                numberProblems++;
-            }
-        }
+        analysisProblems++;
+    }
 
-        if (numberProblems == 0)        
-        {
-            $("#warningRunNumberSingle").hide();
-	    $( "#rowOfSingleInput" ).removeClass( "has-error has-feedback" );
-        }
-        else
-        {
-            $( "#warningRunNumberSingle" ).show();
-	    $( "#rowOfSingleInput" ).addClass( "has-error has-feedback" );
-        }
-
-        if (analysisProblems == 0)        
-        {
-            $("#warningSelectAnalysisSingle").hide();
-        }
-        else
-        {
-            $("#warningSelectAnalysisSingle").show();
-        }
-
-        if(numberProblems==0 && analysisProblems == 0)
-        {
-            $("#sendRunButtonSingle").prop("disabled",false);
-            $("#sendRunButtonSingle").removeClass( "red" ).addClass( "green" );        }
-        else
-        {
-            $("#sendRunButtonSingle").prop("disabled",true);
-            $("#sendRunButtonSingle").removeClass( "green" ).addClass( "red" );
-        }
-    }  
-    if( n == 1) // if it is multiple run
-    {
-        var insertedRun = readCleanRun( 1 );
-        var insertedRunSecond = readCleanRunSecond();
-        var insertedArray = insertedRun.split(";"); 
-        var MultipleRuns;
-       
-        var numberProblems = 0;
-        var numberProblemsSecond = 0;
-        var analysisProblems = 0;
-
-        //have you selected an analysis?
-        if( $("#buttonSelectAnalysisMultiple").text() == "Select an Analysis:"  )
-        {
-            analysisProblems++;
-        }
-
-        for (i in insertedArray) //work on the first input field
-        {
-            insertedArray[i] = insertedArray[i].trim();
-            if ( acceptable ( insertedArray[ i ] ) == 1 )
-            {
-                numberProblems++;
-            }
-        }
-	
-		if ( acceptable ( insertedRunSecond ) == 1 )
-		{
-		    numberProblemsSecond++;
-		}
-
-		//related to the first input
-        if (numberProblems == 0)        
-        {
-            //$( "#warningRunNumberMultiple" ).hide();
-	    $( "#rowOfMultipleInputFirst" ).removeClass( "has-error has-feedback" );
-        }
-        else
-        {
-            //$( "#warningRunNumberMultiple" ).show();
-	    $( "#rowOfMultipleInputFirst" ).addClass( "has-error has-feedback" );
-        }
-
-        //related to the second input
-        if (numberProblemsSecond == 0)        
-        {
-            //$( "#warningRunNumberMultiple" ).hide();
-        	$( "#rowOfMultipleInputSecond" ).removeClass( "has-error has-feedback" );
-        }
-        else
-        {
-            //$( "#warningRunNumberMultiple" ).show();
-	    $( "#rowOfMultipleInputSecond" ).addClass( "has-error has-feedback" );
-        }
-	
-		var totNumbersProblems = numberProblems + numberProblemsSecond;
-		if( totNumbersProblems == 0 )
-		{
-		    $( "#warningRunNumberMultiple" ).hide();	
-		}
-		else
-		{
-		    $( "#warningRunNumberMultiple" ).show();	
-		}
-
-        if (analysisProblems == 0)        
-        {
-            $("#warningSelectAnalysisMultiple").hide();
-        }
-        else
-        {
-            $("#warningSelectAnalysisMultiple").show();
-        }
-
-       
-    	var textual = $( "#runsTextualInput" ).val();
-        
-    	var insertedRows = textual.split(/\r?\n/);
-        
-        var numberProblemsText = 0;
-            	
-        for (r in insertedRows)
-    	{
-        	var insertedArray = insertedRows[r].split( "-" ); 
-        	for (i in insertedArray) 
-		    {
-        		insertedArray[i] = insertedArray[i].trim();
-                if ( acceptable ( insertedArray[ i ] ) == 1 )
-                {
-                	numberProblemsText++;
-                }
-		    }
-    	}
-                
-        if (numberProblemsText == 0)        
-        {
-            $( "#runsTextualInput" ).removeClass( "red-border" );
-        }
-        else
-        {
-            $( "#runsTextualInput" ).addClass( "red-border" );
-        }
-        
-	
-        if( ( numberProblemsText==0 || numberProblems==0) && analysisProblems == 0)
-        {
-            $("#sendRunButtonMultiple").prop("disabled",false);
-            $("#sendRunButtonMultiple").removeClass( "red" ).addClass( "green" );        }
-        else
-        {
-            $("#sendRunButtonMultiple").prop("disabled",true);
-            $("#sendRunButtonMultiple").removeClass( "green" ).addClass( "red" );
-        }
-
+    if ( acceptable ( insertedRunFirst ) == 1 )
+	{
+	    numberProblemsFirst++;
 	}
+
+	if ( ( acceptable ( insertedRunSecond ) == 1 ) && !(insertedRunSecond === "") ) 
+		//the second can be empty.. insingle run analysis case
+	{
+	    numberProblemsSecond++;
+	}
+
+	//related to the first input
+    if (numberProblemsFirst == 0)        
+    {
+        //$( "#warningRunNumberMultiple" ).hide();
+    	$( "#rowOfMultipleInputFirst" ).removeClass( "has-error has-feedback" );
+    }
+    else
+    {
+        //$( "#warningRunNumberMultiple" ).show();
+    	$( "#rowOfMultipleInputFirst" ).addClass( "has-error has-feedback" );
+    }
+
+    //related to the second input
+    if (numberProblemsSecond == 0)        
+    {
+        //$( "#warningRunNumberMultiple" ).hide();
+    	$( "#rowOfMultipleInputSecond" ).removeClass( "has-error has-feedback" );
+    }
+    else
+    {
+        //$( "#warningRunNumberMultiple" ).show();
+    	$( "#rowOfMultipleInputSecond" ).addClass( "has-error has-feedback" );
+    }
+
+	var totNumbersProblems = numberProblemsFirst + numberProblemsSecond;
+	if( totNumbersProblems == 0 )
+	{
+	    $( "#warningRunNumberMultiple" ).hide();	
+	}
+	else
+	{
+	    $( "#warningRunNumberMultiple" ).show();	
+	}
+
+    if (analysisProblems == 0)        
+    {
+        $("#warningSelectAnalysisMultiple").hide();
+    }
+    else
+    {
+        $("#warningSelectAnalysisMultiple").show();
+    }
+
+   
+	var textual = $( "#runsTextualInput" ).val();
+    
+	var insertedRows = textual.split(/\r?\n/);
+    
+    var numberProblemsText = 0;
+        	
+    for (r in insertedRows)
+	{
+    	var insertedArray = insertedRows[r].split( "-" ); 
+    	for (i in insertedArray) 
+	    {
+    		insertedArray[i] = insertedArray[i].trim();
+            if ( acceptable ( insertedArray[ i ] ) == 1 )
+            {
+            	numberProblemsText++;
+            }
+	    }
+	}
+            
+    if (numberProblemsText == 0)        
+    {
+        $( "#runsTextualInput" ).removeClass( "red-border" );
+    }
+    else
+    {
+        $( "#runsTextualInput" ).addClass( "red-border" );
+    }
+    
+
+    if( ( numberProblemsText==0 || totNumbersProblems==0) && analysisProblems == 0)
+    {
+        $("#sendRunButtonMultiple").prop("disabled",false);
+        $("#sendRunButtonMultiple").removeClass( "red" ).addClass( "green" );        }
+    else
+    {
+        $("#sendRunButtonMultiple").prop("disabled",true);
+        $("#sendRunButtonMultiple").removeClass( "green" ).addClass( "red" );
+    }
+
 }
 
-function manageWait( n ) {
+function manageWait() {
     $( "#commonTop" ).hide();
     $( "#commonSemiTop" ).hide();
     $( "#workBlock" ).hide();
