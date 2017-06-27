@@ -6,7 +6,7 @@
 	//echo "alive <br>";
 
 	$file = trim($_GET['run']);
-	$file = substr( $file, 0, -1 );
+	//$file = substr( $file, 0, -1 );
 	//echo "file: " . $file . "<br>";
 
 	$file = '../output/gAnOut_' . $file . ".root";

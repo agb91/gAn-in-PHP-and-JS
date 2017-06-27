@@ -1,15 +1,10 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Jun 4, 2016, 5:28:11 PM
-    Author     : andrea
-*/
 .indexGeneral {
   padding: 20px;
   background-color: #C5D8DA; }
+  .indexGeneral .footer {
+    position: fixed;
+    bottom: 15px;
+    right: 15px; }
   .indexGeneral .height50 {
     height: 53px; }
   .indexGeneral .width240 {
@@ -68,7 +63,8 @@ and open the template in the editor.
     margin-top: 5px; }
   .indexGeneral .starterButton {
     width: 80px;
-    height: 40px; }
+    height: 40px;
+    margin-left: -15px; }
   .indexGeneral .row .logoImage {
     display: block;
     margin-left: auto;

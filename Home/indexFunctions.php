@@ -184,10 +184,13 @@ function getDates( $chunks )
 	return $results;
 }
 
-function readAnalyzes( $allAnalyzesSingle , $n)
+function readAnalyzes( $allAnalyzesSingle, $allAnalyzesMore, $n)
 {
 	//echo "---" . $allAnalyzesSingle . "---";
 	$analyzes = scandir( $allAnalyzesSingle );
+	$addingAnalyzes = scandir( $allAnalyzesMore );
+	$analyzes= array_merge($analyzes, $addingAnalyzes );
+	
 	$cleanAnalyzes = [];
 	
 	if( $n == 0 )
@@ -200,7 +203,7 @@ function readAnalyzes( $allAnalyzesSingle , $n)
     }
     for ( $i = 0 ; $i < count( $analyzes ) ; $i++ )
 	{
-		if ( substr( $analyzes[ $i ] , -2 ) == ".C")
+		if ( (substr( $analyzes[ $i ] , -2 ) == ".C") && ( strpos( $analyzes[ $i ], 'Empty') == false )  )
 		{
 			$toAdd = $analyzes[ $i ];
 			$toAdd = substr( $toAdd , 0 , ( strlen( $toAdd ) - 2 ) );

@@ -145,7 +145,7 @@
                                                 <label for="buttonSelectAnalysisMultiple" class="form-control-label">Choose an analysis</label>
                                             </div>   
                                             <div class = "row centerTextAlign" >
-                                                <?php readAnalyzes( $allAnalyzesMultiple , 1); ?>
+                                                <?php readAnalyzes( $allAnalyzesSingle, $allAnalyzesMore, 1); ?>
                                             </div> 
                                             <div class = "row centerTextAlign" >
                                                 <h4 id="warningSelectAnalysisMultiple">
@@ -258,7 +258,7 @@
                                                 <label for="buttonSelectAnalysisSingle" class="form-control-label">Choose an analysis</label>
                                             </div>   
                                             <div class = "row centerTextAlign" >
-                                                <?php readAnalyzes( $allAnalyzesSingle , 0); ?>
+                                                <?php readAnalyzes( $allAnalyzesSingle , $allAnalyzesMore, 0); ?>
                                             </div> 
                                             <div class = "row centerTextAlign" >
                                                 <h4 id="warningSelectAnalysisSingle">
@@ -305,6 +305,10 @@
                     </div>       
                 </div>    
             </div>    
+
+	        <footer class="footer">
+				©2017 Powered by Andrea Damioli, <a href="https://www.unibs.it/">University of Brescia </a> 
+			</footer>
         </div>  <!-- close block-->  
 
 
@@ -322,5 +326,7 @@
                 </div>
             </div>
         </div>
+        
+
     </body>
 </html>

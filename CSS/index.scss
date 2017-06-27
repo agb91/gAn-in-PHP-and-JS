@@ -3,8 +3,17 @@
 .indexGeneral
 {
 
+
     padding: 20px;
     background-color: $general-background;
+
+	.footer
+	{
+		position: fixed;
+		bottom: 15px;
+		right: 15px;
+		
+	}
 
     .height50
     {
@@ -125,6 +134,7 @@
     {
         width: 80px;
         height: 40px;
+        margin-left: -15px;
     }
     
     .row

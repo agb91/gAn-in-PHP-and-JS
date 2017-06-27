@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /home/andrea/Downloads/buildRoot/bin/thisroot.sh
+#source /home/andrea/Downloads/buildRoot/bin/thisroot.sh
 
 cd $2
 
