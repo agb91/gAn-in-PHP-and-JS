@@ -24,9 +24,6 @@
             include "indexFunctions.php";
             include "../Globals.php";
         ?>
-        <div hidden id = "modalityWell" class="well col-xs-2 fixedTopLeft"> 
-            Sigle Run vs Multiple Run Analysis 
-        </div>
         <div id = "commonTop" class="col-xs-12">
             <div class="row">
                 <div class="col-xs-3"></div>
@@ -50,10 +47,10 @@
 
 
 
-<!-- multiple input -->
+<!--  input -->
 
 
-                        <div id="multiple"> 
+                        <div id=""> 
                             <div class="col-xs-12">    
                                 <div class="row"><!-- run row -->
                                     <h3> 
@@ -85,18 +82,19 @@
                                             </div>
                                             <div id="rangeBlock">
                                                 <div class = "row centerTextAlign" >
-                                                    <label for="whichRunsMultiple" class="form-control-label">Insert some Runs: </label>
+                                                    <label for="whichRunsFirst" class="form-control-label">Insert some Runs: </label>
                                                 </div>   
-                                                <div class = "row" id="rowOfMultipleInputFirst">
-                                                    <input type="text" data-toggle="tooltip" title="Insert here some run numbers, on which the selected multiple-run analyzes will be applied."  id="whichRunsMultiple" name="whichRun" class="form-control littlePadding" placeholder="example: 58880">
+                                                <div class = "row" id="rowOfInputFirst">
+                                                    <input type="text" data-toggle="tooltip" title="Insert here some run numbers, on which the selected -run analyzes will be applied."  
+                                                    	id="whichRunsFirst" name="whichRunFirst" class="form-control littlePadding" placeholder="example: 58880">
                                                 </div> 
 
-                    		  			        <div class = "row" id="rowOfMultipleInputSecond">
-                                                    <input type="text" id="whichRunsMultipleSecond" name="whichRunSecond" class="form-control littlePadding" placeholder="example: 58883">
+                    		  			        <div class = "row" id="rowOfInputSecond">
+                                                    <input type="text" id="whichRunsSecond" name="whichRunSecond" class="form-control littlePadding" placeholder="example: 58883">
                                                 </div>
 
                                                 <div class = "row centerTextAlign" >
-                                                    <h4 id="warningRunNumberMultiple">
+                                                    <h4 id="warningRunNumber">
                                                         <div style="color: red;"><span class="glyphicon glyphicon-remove"></span> Insert numbers, without letters!</div>
                                                     </h4>
                                                 </div>
@@ -107,13 +105,13 @@
                                         </div>
                                         <div class = "col-xs-4 ridge" data-toggle='tooltip' title='Select an analysis from the dropdown menu; this will be applied to the selected run'>
                                             <div class = "row centerTextAlign" >
-                                                <label for="buttonSelectAnalysisMultiple" class="form-control-label">Choose an analysis</label>
+                                                <label for="buttonSelectAnalysis" class="form-control-label">Choose an analysis</label>
                                             </div>   
                                             <div class = "row centerTextAlign" >
                                                 <?php readAnalyzes( $allAnalyzesSingle, $allAnalyzesMore, 1); ?>
                                             </div> 
                                             <div class = "row centerTextAlign" >
-                                                <h4 id="warningSelectAnalysisMultiple">
+                                                <h4 id="warningSelectAnalysis">
                                                     <div style="color: red;"><span class="glyphicon glyphicon-remove"></span> Select an analysis!</div>
                                                 </h4>
                                             </div>
@@ -124,8 +122,8 @@
                                             </div>   
                                             <div class = "row" >
 						<div class="col-xs-3"></div>
-                                                <div id = "mouseOverTargetMultiple" class="col-xs-6 starter">
-                                                    <button id="sendRunButtonMultiple" data-toggle="tooltip" title="Start the program with the inserted runs" onclick="manageWait()" type="submit" class="btn btn-primary starterButton"> Start </button>
+                                                <div id = "mouseOverTarget" class="col-xs-6 starter">
+                                                    <button id="sendRunButton" data-toggle="tooltip" title="Start the program with the inserted runs" onclick="manageWait()" type="submit" class="btn btn-primary starterButton"> Start </button>
                                                 </div>
                                             </div> 
                                         </div>    

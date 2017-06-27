@@ -11,37 +11,36 @@ $( document ).ready(function() {
     $('[data-toggle="tooltip"]').tooltip();
 
     //the following commands are always are executed sometimes in single
-    //version of the interface, some other times in multiple 
+    //version of the interface, some other times in  
     //validate the inserted runs
     //first of all, disable the run-send-button (until the run number isn't correct)
     //$( "#sendRunButtonSingle" ).prop("disabled",true);
-    $( "#sendRunButtonSingle" ).prop("disabled",true);
-    $( "#sendRunButtonMultiple" ).prop("disabled",true);
-    $( "#warningRunNumberMultiple" ).hide();
-    $( "#warningSelectAnalysisMultiple" ).hide();
+    $( "#sendRunButton" ).prop("disabled",true);
+    $( "#warningRunNumber" ).hide();
+    $( "#warningSelectAnalysis" ).hide();
 
     $( "#areaBlock" ).keyup(function() {//check every time the user uses the keyboard 
     	validate();
     });
     
-    $( "#whichRunsMultiple" ).keyup(function() {//check every time the user uses the keyboard 
+    $( "#whichRunsFirst" ).keyup(function() {//check every time the user uses the keyboard 
         validate();
     });
-    $( "#whichRunsMultipleSecond" ).keyup(function() {//check every time the user uses the keyboard 
+    $( "#whichRunsSecond" ).keyup(function() {//check every time the user uses the keyboard 
         validate();
     });	
 
-    $( "#buttonSelectAnalysisMultiple" ).click(function() {//check every time the user click this button
+    $( "#buttonSelectAnalysis" ).click(function() {//check every time the user click this button
         validate();
     });
-    $( "#whichRunsMultiple" ).click(function() {//check every time the user clicks with the mouse on the input form
+    $( "#whichRunsFirst" ).click(function() {//check every time the user clicks with the mouse on the input form
         validate();
     });
-    $( "#whichRunsMultipleSecond" ).click(function() {//check every time the user clicks with the mouse on the input form
+    $( "#whichRunsSecond" ).click(function() {//check every time the user clicks with the mouse on the input form
         validate();
     });
 
-    $( "#mouseOverTargetMultiple" ).mouseover(function() {
+    $( "#mouseOverTarget" ).mouseover(function() {
         validate();
     });
 });
@@ -70,8 +69,8 @@ function hideInputNumbers()
     }
 }
 
-//select if you want to work with single or multiple runs
-function selectSingleVsMultiple( n )
+//select if you want to work with single or  runs
+function selectSingleVs( n )
 {
     $( "#chooseModality" ).hide();
     $( "#changeModality" ).show();
@@ -82,7 +81,7 @@ function selectSingleVsMultiple( n )
     }
     else
     {
-        $( "#modalityWell").text( "You are working with Multiple Runs Analysis" );
+        $( "#modalityWell").text( "You are working with  Runs Analysis" );
         $( "#modalityWell").show();
     }
     showOtherObject(n);    
@@ -112,20 +111,20 @@ function showOtherObject( n )
     $( "#workBlock" ).show();
     if( n == 0)
     {
-        $( "#multiple" ).hide();
+        $( "#" ).hide();
         $( "#single" ).show();
     }
     else
     {
-        $( "#multiple" ).show();
+        $( "#" ).show();
         $( "#single" ).hide();
     }
     
 }
 
-function readCleanRunSecond() // the second run in the multiple case is particulare.. we'll think about if this function has reason to exist
+function readCleanRunSecond() // the second run in the  case is particulare.. we'll think about if this function has reason to exist
 {
-    var secondRun = $("#whichRunsMultipleSecond").val();
+    var secondRun = $("#whichRunsSecond").val();
     return secondRun;
 }
 
@@ -133,7 +132,7 @@ function readCleanRunSecond() // the second run in the multiple case is particul
 function readCleanRunFirst()
 {
     var insertedRun = " ";
-    insertedRun = $("#whichRunsMultiple").val();
+    insertedRun = $("#whichRunsFirst").val();
     insertedRun = insertedRun.replace(new RegExp(",", "g"), ";");// we want to allow the user to separate the run numbers 
     //also with comma and '-' and point
     insertedRun = insertedRun.replace(new RegExp("-", "g"), ";");
@@ -162,14 +161,13 @@ function validate( )
 {
     var insertedRunFirst = readCleanRunFirst();
     var insertedRunSecond = readCleanRunSecond();
-    var MultipleRuns;
    
     var numberProblemsFirst = 0;
     var numberProblemsSecond = 0;
     var analysisProblems = 0;
 
     //have you selected an analysis?
-    if( $("#buttonSelectAnalysisMultiple").text() == "Select an Analysis:"  )
+    if( $("#buttonSelectAnalysis").text() == "Select an Analysis:"  )
     {
         analysisProblems++;
     }
@@ -188,44 +186,44 @@ function validate( )
 	//related to the first input
     if (numberProblemsFirst == 0)        
     {
-        //$( "#warningRunNumberMultiple" ).hide();
-    	$( "#rowOfMultipleInputFirst" ).removeClass( "has-error has-feedback" );
+        //$( "#warningRunNumber" ).hide();
+    	$( "#rowOfInputFirst" ).removeClass( "has-error has-feedback" );
     }
     else
     {
-        //$( "#warningRunNumberMultiple" ).show();
-    	$( "#rowOfMultipleInputFirst" ).addClass( "has-error has-feedback" );
+        //$( "#warningRunNumber" ).show();
+    	$( "#rowOfInputFirst" ).addClass( "has-error has-feedback" );
     }
 
     //related to the second input
     if (numberProblemsSecond == 0)        
     {
-        //$( "#warningRunNumberMultiple" ).hide();
-    	$( "#rowOfMultipleInputSecond" ).removeClass( "has-error has-feedback" );
+        //$( "#warningRunNumber" ).hide();
+    	$( "#rowOfInputSecond" ).removeClass( "has-error has-feedback" );
     }
     else
     {
-        //$( "#warningRunNumberMultiple" ).show();
-    	$( "#rowOfMultipleInputSecond" ).addClass( "has-error has-feedback" );
+        //$( "#warningRunNumber" ).show();
+    	$( "#rowOfInputSecond" ).addClass( "has-error has-feedback" );
     }
 
 	var totNumbersProblems = numberProblemsFirst + numberProblemsSecond;
 	if( totNumbersProblems == 0 )
 	{
-	    $( "#warningRunNumberMultiple" ).hide();	
+	    $( "#warningRunNumber" ).hide();	
 	}
 	else
 	{
-	    $( "#warningRunNumberMultiple" ).show();	
+	    $( "#warningRunNumber" ).show();	
 	}
 
     if (analysisProblems == 0)        
     {
-        $("#warningSelectAnalysisMultiple").hide();
+        $("#warningSelectAnalysis").hide();
     }
     else
     {
-        $("#warningSelectAnalysisMultiple").show();
+        $("#warningSelectAnalysis").show();
     }
 
    
@@ -260,12 +258,12 @@ function validate( )
 
     if( ( numberProblemsText==0 || totNumbersProblems==0) && analysisProblems == 0)
     {
-        $("#sendRunButtonMultiple").prop("disabled",false);
-        $("#sendRunButtonMultiple").removeClass( "red" ).addClass( "green" );        }
+        $("#sendRunButton").prop("disabled",false);
+        $("#sendRunButton").removeClass( "red" ).addClass( "green" );        }
     else
     {
-        $("#sendRunButtonMultiple").prop("disabled",true);
-        $("#sendRunButtonMultiple").removeClass( "green" ).addClass( "red" );
+        $("#sendRunButton").prop("disabled",true);
+        $("#sendRunButton").removeClass( "green" ).addClass( "red" );
     }
 
 }
@@ -287,7 +285,7 @@ function manageWait() {
 function checkAlreadyExist(needle)
 {
         needle = " " + needle; //javascript wants a string or it will crash with the trim....
-        haystack = $("#whichRunsMultiple").val().split(";");
+        haystack = $("#whichRuns").val().split(";");
         var alreadyExist = false;
         for (i in haystack) 
         {
@@ -304,25 +302,14 @@ function checkAlreadyExist(needle)
 add the range of runs written in the modal to the input form
 */
 //write which analysis the user chooses 
-function setAnalysis( i , n )
+function setAnalysis( i )
 {
-    if( n == 0)
-    {
-        var analyzes = $("#analyzesSingle").text();
-        var analyzesVector = analyzes.split("--");
-        var selectedAnalysis = analyzesVector[ i ];
-        $("#selectedAnalysisSingle").val(selectedAnalysis);
-        $("#buttonSelectAnalysisSingle").text("Selected: " + selectedAnalysis);
-    }
-    else
-    {
-        var analyzes = $("#analyzesMultiple").text();
-        var analyzesVector = analyzes.split("--");
-        var selectedAnalysis = analyzesVector[ i ];
-        $("#selectedAnalysisMultiple").val(selectedAnalysis);
-        $("#buttonSelectAnalysisMultiple").text("Selected: " + selectedAnalysis);
-    }
-    validate( n );
+	var analyzes = $("#analyzes").text();
+    var analyzesVector = analyzes.split("--");
+    var selectedAnalysis = analyzesVector[ i ];
+    $("#selectedAnalysis").val(selectedAnalysis);
+    $("#buttonSelectAnalysis").text("Selected: " + selectedAnalysis);
+    validate();
 }
 
 //has this run number some problems? (not unique, not a number, not empty)

@@ -37,9 +37,9 @@
 			//echo "<br>whichRunSecond definitive: " . $whichRunSecond  . "<br>";
         }
         
-        if(  isset( $_POST["whichRun"] ) && strlen( $_POST["whichRun"]) > 1 )
+        if(  isset( $_POST["whichRunFirst"] ) && strlen( $_POST["whichRunFirst"]) > 1 )
         {
-        	$whichRunFirst = cleanString( $_POST["whichRun"]);
+        	$whichRunFirst = cleanString( $_POST["whichRunFirst"]);
 			//echo "<br> whichRunFirst definitive: " . $whichRunFirst  . "<br>";
         }
         
@@ -47,8 +47,7 @@
 		//echo "<br> cardinality: " . $cardinality;
 		
 		
-        $whichAnalysis = $_POST["selectedAnalysisSingle"];
-        $whichAnalysis = $whichAnalysis . $_POST["selectedAnalysisMultiple"];
+        $whichAnalysis = $_POST["selectedAnalysis"];
         $whichAnalysis = cleanString( $whichAnalysis );
         //echo "<br>the read analysis is : " . $whichAnalysis;
       

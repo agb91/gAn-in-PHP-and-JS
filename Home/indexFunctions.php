@@ -193,14 +193,7 @@ function readAnalyzes( $allAnalyzesSingle, $allAnalyzesMore, $n)
 	
 	$cleanAnalyzes = [];
 	
-	if( $n == 0 )
-	{
-		echo "<div id='analyzesSingle' hidden>";
-    }
-    else
-    {
-    	echo "<div id='analyzesMultiple' hidden>";
-    }
+	echo "<div id='analyzes' hidden>";
     for ( $i = 0 ; $i < count( $analyzes ) ; $i++ )
 	{
 		if ( (substr( $analyzes[ $i ] , -2 ) == ".C") && ( strpos( $analyzes[ $i ], 'Empty') == false )  )
@@ -215,32 +208,18 @@ function readAnalyzes( $allAnalyzesSingle, $allAnalyzesMore, $n)
 	//echo "Ingmari's code--";
 	echo "</div>";
 	echo "<div class='dropdown col-xs-12'>";
-	if( $n == 0 )
-	{
-		echo "<button id='buttonSelectAnalysisSingle' class='btn btn-default dropdown-toggle littlePadding' type='button' data-toggle='dropdown'>Select an Analysis:";
-	}
-	else
-	{
-		echo "<button id='buttonSelectAnalysisMultiple' class='btn btn-default dropdown-toggle littlePadding' type='button' data-toggle='dropdown'>Select an Analysis:";
-	}
+	echo "<button id='buttonSelectAnalysis' class='btn btn-default dropdown-toggle littlePadding' type='button' data-toggle='dropdown'>Select an Analysis:";
     echo "<span class='caret'></span></button>";
     echo "<ul class='dropdown-menu'>";
     echo "<li class='dropdown-header'>Defaults</li>";
     for ( $i = 0 ; $i < count( $cleanAnalyzes ) ; $i++ )
 	{
-		echo "<li><a href='#' onclick='setAnalysis(" . $i . " , " . $n . ")'>" . $cleanAnalyzes[ $i ] . "</a></li>"; 
+		echo "<li><a href='#' onclick='setAnalysis(" . $i . ")'>" . $cleanAnalyzes[ $i ] . "</a></li>"; 
 	}
     echo "</ul>";
     echo "</div>"; 
     echo "<p hidden>";
-    if( $n == 0 )
-    {
-    	echo "<input type='text' id='selectedAnalysisSingle' name='selectedAnalysisSingle' class='form-control'>";
-    }
-    else
-    {
-    	echo "<input type='text' id='selectedAnalysisMultiple' name='selectedAnalysisMultiple' class='form-control'>";	
-    }
+    echo "<input type='text' id='selectedAnalysis' name='selectedAnalysis' class='form-control'>";	
     echo "</p>";
     
 

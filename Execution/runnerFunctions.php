@@ -190,6 +190,8 @@ function executeBash($command)
 {
 
 	$command = cleanString( $command );
+	
+	echo "command to execute: " . $command;
 	$output="";
 	$descriptorspec = array(
             0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
